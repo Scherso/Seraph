@@ -1,0 +1,18 @@
+[
+    {
+        "modid": "${id}",
+        "name": "${name}",
+        "description": "A mod which shows duels stats pre-game.",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "https://github.com/Scherso/Seraph",
+        "updateUrl": "",
+        "authorList": [
+            "Salmon"
+        ],
+        "credits": "",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
