@@ -37,11 +37,7 @@ public class QueueEvent {
             String server = obj.get("server").getAsString();
             String gametype = obj.get("gametype").getAsString();
 
-            if (obj.get("mode") != null && obj.get("map") != null && gametype.equalsIgnoreCase("DUELS")) {
-                this.ingame = true;
-            } else {
-                this.ingame = false;
-            }
+            this.ingame = obj.get("mode") != null && obj.get("map") != null && gametype.equalsIgnoreCase("DUELS"); // simplify from if/else to a one line value declaration
         }
     }
 }

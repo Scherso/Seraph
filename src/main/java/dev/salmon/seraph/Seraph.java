@@ -28,7 +28,7 @@ public class Seraph {
         Vigilance.initialize();
         this.config = new SeraphConfig();
         this.config.preload();
-        this.registerListeners(new ApiKeyListener());
+        registerListeners(new ApiKeyListener());
 
     }
 
