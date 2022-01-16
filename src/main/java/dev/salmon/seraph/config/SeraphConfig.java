@@ -5,7 +5,6 @@ import gg.essential.universal.ChatColor;
 import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;
-import org.omg.CORBA.INITIALIZE;
 
 import java.io.File;
 
