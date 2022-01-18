@@ -36,7 +36,7 @@ public class SeraphConfigCommand extends Command {
 
             // if their api key is empty, there is no key set, and a message to remind the user how to set an api key.
             if (emptyApiKey) {
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.RED + "Your API key cannot be null. /apikey <apikey>"));
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.RED + "Your API key cannot be null. /seraph apikey <apikey>"));
         }
     }
 }
