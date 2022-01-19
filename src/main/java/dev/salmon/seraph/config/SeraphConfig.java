@@ -25,6 +25,7 @@ public class SeraphConfig extends Vigilant {
             protectedText = true
     )
     private String apiKey = ""; // cannot initialize a variable with itself ( getApiKey() )
+    // todo load apiKey from the toml config, if it exists and is not empty
 
     // the api key that will be used.
     public String getApiKey() { return this.apiKey; }
