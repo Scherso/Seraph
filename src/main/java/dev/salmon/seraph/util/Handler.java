@@ -3,6 +3,7 @@ package dev.salmon.seraph.util;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dev.salmon.seraph.Seraph;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,7 @@ public class Handler {
     }
 
     public static void asExecutor(Runnable... runnables) {
-        ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS, new ThreadFactoryBuilder().setNameFormat("Seraph-%d").build());
+        ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS, new ThreadFactoryBuilder().setNameFormat(Seraph.ID + "h-%d").build());
         Arrays.stream(runnables).forEachOrdered(executorService::submit);
     }
 
