@@ -1,8 +1,8 @@
-
 package dev.salmon.seraph;
 
 import dev.salmon.seraph.command.SeraphConfigCommand;
 import dev.salmon.seraph.config.SeraphConfig;
+import dev.salmon.seraph.events.QueueEvent;
 import dev.salmon.seraph.listener.ApiKeyListener;
 import gg.essential.vigilance.Vigilance;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,7 +28,7 @@ public class Seraph {
         Vigilance.initialize();
         this.config = new SeraphConfig();
         this.config.preload();
-        registerListeners(new ApiKeyListener());
+        registerListeners(new ApiKeyListener(), new QueueEvent());
 
     }
 
