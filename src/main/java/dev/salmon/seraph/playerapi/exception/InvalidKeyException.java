@@ -8,7 +8,7 @@ import net.minecraft.util.ChatComponentText;
 public class InvalidKeyException extends Exception {
 
     public InvalidKeyException() {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.GRAY + "Your API key is invalid, please run" + ChatColor.RED + ChatColor.BOLD + "/api new" + ChatColor.GRAY + "to use Seraph."));
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.RED + "It seems your API key is empty or invalid. Please run " + ChatColor.BOLD + "/api new"));
     }
 
 }

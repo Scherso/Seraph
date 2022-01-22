@@ -15,6 +15,7 @@ public class Seraph {
     public static final String NAME = "@NAME@", VER = "@VER@", ID = "@ID@";
     // instance of the main class.
     @Mod.Instance private static Seraph instance;
+    private SeraphConfigCommand configCommand;
     private SeraphConfig config;
 
     public static Seraph getInstance() {
@@ -38,7 +39,6 @@ public class Seraph {
             MinecraftForge.EVENT_BUS.register(o);
         }
     }
-
     // instance of the config.
     public SeraphConfig getConfig() {
         return config;

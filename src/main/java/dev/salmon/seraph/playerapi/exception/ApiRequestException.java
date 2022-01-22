@@ -8,7 +8,7 @@ import net.minecraft.util.ChatComponentText;
 public class ApiRequestException extends Exception {
 
     public ApiRequestException() {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.GRAY + "There was an API request exception. If this persists, contact a developer."));
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.RED + "There was an API request exception. If this persists, contact a developer."));
     }
 
 }
