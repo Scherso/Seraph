@@ -8,7 +8,7 @@ import net.minecraft.util.ChatComponentText;
 public class BadJsonException extends Exception {
 
     public BadJsonException() {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.GRAY + "Hypixel API returned an bad json, Hypixel API may be down. If it is not, please contact a developer about this."));
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(References.SERAPHPREFIX + ChatColor.RED + "Hypixel API returned an bad json, Hypixel API may be down. If it is not, please contact a developer about this."));
     }
 
 }
