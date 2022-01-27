@@ -12,6 +12,7 @@ import java.util.UUID;
 public class WorldLoader extends StatWorld {
     Minecraft mc = Minecraft.getMinecraft();
 
+
     /* uuid version 4 means its a real player or watchdog bot, version 1 means it's a nicked player */
     public boolean loadOrRender(EntityPlayer player) {
         return player != null && (player.getUniqueID().version() == 4 || player.getUniqueID().version() == 1);

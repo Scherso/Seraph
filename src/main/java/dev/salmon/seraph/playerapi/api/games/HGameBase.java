@@ -3,7 +3,7 @@ package dev.salmon.seraph.playerapi.api.games;
 import dev.salmon.seraph.playerapi.api.HypixelAPI;
 import dev.salmon.seraph.playerapi.api.ILeveling;
 import dev.salmon.seraph.playerapi.api.stats.Stat;
-import dev.salmon.seraph.util.Handler;
+import dev.salmon.seraph.util.handler.Handler;
 import gg.essential.api.utils.Multithreading;
 import gg.essential.universal.ChatColor;
 

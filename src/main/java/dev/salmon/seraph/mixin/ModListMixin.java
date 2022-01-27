@@ -1,5 +1,6 @@
 package dev.salmon.seraph.mixin;
 
+import dev.salmon.seraph.Seraph;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.network.handshake.FMLHandshakeMessage;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +25,7 @@ public class ModListMixin extends FMLHandshakeMessage {
     @Inject(method = "<init>(Ljava/util/List;)V", at = @At("RETURN"), remap = false)
     private void removeMod(List<ModContainer> modList, CallbackInfo ci) {
         // if the key matches the modid of seraph, it is removed.
-        this.modTags.keySet().removeIf(key -> key.equals("seraph"));
+        this.modTags.keySet().removeIf(key -> key.equals(Seraph.ID));
     }
 
 }

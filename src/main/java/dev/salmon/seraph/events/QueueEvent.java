@@ -2,7 +2,7 @@ package dev.salmon.seraph.events;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import dev.salmon.seraph.util.Handler;
+import dev.salmon.seraph.util.handler.Handler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
@@ -15,7 +15,6 @@ public class QueueEvent {
     Minecraft mc = Minecraft.getMinecraft();
     private boolean ingame;
     private World world;
-    private boolean executed;
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
@@ -27,14 +26,12 @@ public class QueueEvent {
         }
 
         if (!mc.isGamePaused() && mc.thePlayer != null && ingame) {
-                this.tick(); // it still ticks a couple more times than usual *every tick*
+            this.tick(); // it still ticks a couple more times than usual *every tick*
         }
     }
 
     private void tick() {
-        Handler.asExecutor(() -> {
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("you have queued"));
-        });
+        Handler.asExecutor(() -> Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("you have queued")));
     }
 
     @SubscribeEvent
