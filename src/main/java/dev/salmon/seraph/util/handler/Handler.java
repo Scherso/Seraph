@@ -1,4 +1,4 @@
-package dev.salmon.seraph.util;
+package dev.salmon.seraph.util.handler;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gson.Gson;

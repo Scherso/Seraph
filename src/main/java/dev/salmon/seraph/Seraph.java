@@ -4,6 +4,7 @@ import dev.salmon.seraph.command.SeraphConfigCommand;
 import dev.salmon.seraph.config.SeraphConfig;
 import dev.salmon.seraph.events.QueueEvent;
 import dev.salmon.seraph.listener.ApiKeyListener;
+import gg.essential.universal.ChatColor;
 import gg.essential.vigilance.Vigilance;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -13,6 +14,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 public class Seraph {
 
     public static final String NAME = "@NAME@", VER = "@VER@", ID = "@ID@";
+    public interface Prefix {
+        String SeraphPrefix = ChatColor.GOLD + "Seraph " + ChatColor.DARK_GRAY + "» ";
+    }
     // instance of the main class.
     @Mod.Instance private static Seraph instance;
     private SeraphConfigCommand configCommand;
@@ -30,7 +34,6 @@ public class Seraph {
         this.config = new SeraphConfig();
         this.config.preload();
         registerListeners(new ApiKeyListener(), new QueueEvent());
-
     }
 
     // registering listeners to be used.
