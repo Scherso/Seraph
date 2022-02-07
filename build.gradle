@@ -12,15 +12,12 @@ archivesBaseName = projectName
 sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = "UTF-8"
 
-sourceCompatibility = targetCompatibility = 1.8
-compileJava.options.encoding = 'UTF-8'
-
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false
-    
+    // setting name, verion, and id references 
     replace('@NAME@', projectName)
     replace('@VER@': projectVersion)
     replace('@ID@', projectId)
