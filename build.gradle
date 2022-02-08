@@ -2,7 +2,6 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "6f53277"
     id "com.github.johnrengelman.shadow" version "6.1.0"
     id 'org.spongepowered.mixin' version "d5f9873"
-    id "net.kyori.blossom" version "1.3.0"
     id "java"
 }
 
@@ -13,22 +12,15 @@ archivesBaseName = projectName
 sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = "UTF-8"
 
-// blossom is a token replacement gradle plugin for java, scala, and koltin. see more at https://github.com/KyoriPowered/blossom
-blossom {
-    String className = projectClassName
-    replaceToken("@VER@", projectVersion, className)
-    replaceToken("@NAME@", projectName, className)
-    replaceToken("@ID@", projectId, className)
-}
-
-sourceCompatibility = targetCompatibility = 1.8
-compileJava.options.encoding = 'UTF-8'
-
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false
+    // setting name, verion, and id references 
+    replace('@NAME@', projectName)
+    replace('@VER@': projectVersion)
+    replace('@ID@', projectId)
 
     // setting client run arguments for my mixins, and Essential's setup tweaker.
     clientRunArgs += "--mixin mixins.${projectId}.json"
