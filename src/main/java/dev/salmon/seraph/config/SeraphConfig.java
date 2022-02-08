@@ -12,7 +12,7 @@ public class SeraphConfig extends Vigilant {
 
     // setting the file and name of the file. Seraph.NAME will appear at the top of the config screen.
     public SeraphConfig() {
-        super(new File("./config", Seraph.ID + ".toml"), ChatColor.GOLD + Seraph.NAME);
+        super(new File("./config/Seraph", Seraph.ID + ".toml"), ChatColor.GOLD + Seraph.NAME);
         initialize();
     }
 
