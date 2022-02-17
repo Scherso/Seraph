@@ -17,18 +17,17 @@ minecraft {
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false
-    // setting name, verion, and id references 
+    // property references...
     replace('@NAME@', projectName)
     replace('@VER@': projectVersion)
     replace('@ID@', projectId)
 
-    // setting client run arguments for my mixins, and Essential's setup tweaker.
+    // JVM args...
     clientRunArgs += "--mixin mixins.${projectId}.json"
     clientRunArgs += '--tweakClass gg.essential.loader.stage0.EssentialSetupTweaker'
 }
 
 configurations {
-    // shade is a plugin used to create a shaded jar, I use it to "shade" dependencies.
     shade
     implementation.extendsFrom(shade)
 }
@@ -41,13 +40,17 @@ repositories {
 }
 
 dependencies {
-    // Essential is a Minecraft modding library amd qal mod, this gives me access to the vigilance gui, and essential api for commands.
+    // essential...
     shade ("gg.essential:loader-launchwrapper:${essentialVersion}") {
         transitive = false
     }
     implementation 'gg.essential:essential-1.8.9-forge:1626+release-launch'
-    // mixins, which are used to modify the source code of a software you are modding, see more at https://github.com/SpongePowered/Mixin
-    annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+
+    // mixins...
+    compileOnly(annotationProcessor("org.spongepowered:mixin:${spongePoweredMixinVersion}"))
+    annotationProcessor("com.google.code.gson:gson:${gsonVersion}")
+    annotationProcessor("com.google.guava:guava:${guavaVersion}")
+    annotationProcessor("org.ow2.asm:asm-tree:${asmTreeVersion}")
 }
 
 processResources {
