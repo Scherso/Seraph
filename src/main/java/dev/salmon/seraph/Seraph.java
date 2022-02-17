@@ -1,8 +1,8 @@
 package dev.salmon.seraph;
 
-import dev.salmon.seraph.command.SeraphConfigCommand;
+import dev.salmon.seraph.command.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
-import dev.salmon.seraph.events.QueueEvent;
+import dev.salmon.seraph.listener.QueueListener;
 import dev.salmon.seraph.listener.ApiKeyListener;
 import gg.essential.universal.ChatColor;
 import gg.essential.vigilance.Vigilance;
@@ -17,9 +17,10 @@ public class Seraph {
     public interface Prefix {
         String SeraphPrefix = ChatColor.GOLD + "Seraph " + ChatColor.DARK_GRAY + "» ";
     }
+
     // instance of the main class.
     @Mod.Instance private static Seraph instance;
-    private SeraphConfigCommand configCommand;
+    private SeraphCommand configCommand;
     private SeraphConfig config;
 
     public static Seraph getInstance() {
@@ -29,11 +30,11 @@ public class Seraph {
     @Mod.EventHandler
     protected void onInitialization(FMLInitializationEvent event) {
         // registering and loading configs and commands.
-        new SeraphConfigCommand().register();
+        new SeraphCommand().register();
         Vigilance.initialize();
         this.config = new SeraphConfig();
         this.config.preload();
-        registerListeners(new ApiKeyListener(), new QueueEvent());
+        registerListeners(new ApiKeyListener(), new QueueListener());
     }
 
     // registering listeners to be used.

@@ -1,11 +1,13 @@
-package dev.salmon.seraph.playerapi.api;
+package dev.salmon.seraph.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.playerapi.api.games.HypixelGames;
-import dev.salmon.seraph.playerapi.exception.*;
+import dev.salmon.seraph.api.exception.ApiRequestException;
+import dev.salmon.seraph.api.exception.BadJsonException;
+import dev.salmon.seraph.api.exception.InvalidKeyException;
+import dev.salmon.seraph.api.exception.PlayerNullException;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -17,7 +19,8 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
-public class HypixelAPI {
+public class JsonRequest {
+
     private final String key = Seraph.getInstance().getConfig().getApiKey();
     public JsonObject achievementObj;
     public JsonObject playerObject;
@@ -75,43 +78,23 @@ public class HypixelAPI {
         return obj;
     }
 
-    /**
-     * @param wholeObject Target Player's Hypixel API Whole Object
-     * @param game Game Stats to retrieve
-     * @return JsonObject of the specified gameType's Stats
-     */
-    public static JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
-        JsonObject player = wholeObject.get("player").getAsJsonObject();
-        JsonObject stats = player.get("stats").getAsJsonObject();
-
-        if (stats.get(game.getApiName()) != null) {
-            return stats.get(game.getApiName()).getAsJsonObject();
-        } else {
-            throw new GameNullException(game);
-        }
-    }
-
-    /**
-     * @param name Target's Minecraft Name
-     * @return UUID of Target using Mojang API
-     */
+    // this isn't really useful but i think i might need it
     public static String getUUID(String name) {
         String uuid = "";
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", name));
+            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", uuid));
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
                 uuid = object.get("id").getAsString();
             } catch (NullPointerException ex) {
-                System.out.println("Could not get UUID");
                 ex.printStackTrace();
             }
         } catch (IOException ex) {
-            System.out.println("Could not get UUID");
             ex.printStackTrace();
         }
 
         return uuid;
     }
+
 }

@@ -14,10 +14,10 @@ import net.minecraft.util.IChatComponent;
 
 import java.util.Optional;
 
-public class SeraphConfigCommand extends Command {
+public class SeraphCommand extends Command {
 
     // setting the name of the command, and whether it is tab completable.
-    public SeraphConfigCommand() {
+    public SeraphCommand() {
         super(Seraph.ID, true);
     }
 
@@ -27,7 +27,6 @@ public class SeraphConfigCommand extends Command {
         EssentialAPI.getGuiUtil().openScreen(Seraph.getInstance().getConfig().gui());
     }
 
-    // creating a sub command to set your api key without /api new.
     @SubCommand(value = "apikey", aliases = {"setapi", "setapikey", "setkey"}, description = "Set your api key with a command, if you already have one.")
     public void apikey(@DisplayName("API-Key") String apikey) {
         // a boolean to check if the user set nothing as their api key.

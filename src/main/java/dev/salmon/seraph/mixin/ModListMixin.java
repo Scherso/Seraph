@@ -21,7 +21,6 @@ public class ModListMixin extends FMLHandshakeMessage {
      * @author __fastcall
      * @see net.minecraftforge.fml.common.network.handshake.FMLHandshakeMessage
      */
-    // finding and injecting into the method which sends you mod.
     @Inject(method = "<init>(Ljava/util/List;)V", at = @At("RETURN"), remap = false)
     private void removeMod(List<ModContainer> modList, CallbackInfo ci) {
         // if the key matches the modid of seraph, it is removed.
