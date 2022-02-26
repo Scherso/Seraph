@@ -8,7 +8,7 @@ import net.minecraft.util.ChatComponentText;
 public class PlayerNullException extends Exception {
 
     public PlayerNullException() {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.Prefix.SeraphPrefix + ChatColor.RED + "Null player exception, try re-queue."));
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Null player exception, try re-queue."));
     }
 
 }

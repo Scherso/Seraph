@@ -4,48 +4,64 @@ import dev.salmon.seraph.command.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
 import dev.salmon.seraph.listener.QueueListener;
 import dev.salmon.seraph.listener.ApiKeyListener;
+import dev.salmon.seraph.util.CommandQueue;
+import dev.salmon.seraph.util.locraw.LocrawInfo;
+import dev.salmon.seraph.util.locraw.LocrawUtil;
 import gg.essential.universal.ChatColor;
-import gg.essential.vigilance.Vigilance;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventBus;
 
 @Mod(modid = Seraph.ID, name = Seraph.NAME, version = Seraph.VER)
 public class Seraph {
 
     public static final String NAME = "@NAME@", VER = "@VER@", ID = "@ID@";
-    public interface Prefix {
-        String SeraphPrefix = ChatColor.GOLD + "Seraph " + ChatColor.DARK_GRAY + "» ";
+    public static String SeraphPrefix = ChatColor.GOLD + "Seraph " + ChatColor.DARK_GRAY + "» ";
+
+    @SuppressWarnings("unused")
+    @Mod.Instance private static Seraph instance;
+    private SeraphConfig config;
+    private final CommandQueue commandQueue = new CommandQueue();
+    private final LocrawInfo locrawInfo = new LocrawInfo();
+    private final LocrawUtil locrawUtil = new LocrawUtil();
+
+    @Mod.EventHandler
+    protected void onInitialization(FMLInitializationEvent event) {
+        new SeraphCommand().register();
+        this.config = new SeraphConfig();
+        this.config.preload();
+
+        registerHandlers();
     }
 
-    // instance of the main class.
-    @Mod.Instance private static Seraph instance;
-    private SeraphCommand configCommand;
-    private SeraphConfig config;
+    private void registerHandlers() {
+        final EventBus eventBus = MinecraftForge.EVENT_BUS;
+
+        eventBus.register(new ApiKeyListener());
+        eventBus.register(new QueueListener());
+        eventBus.register(locrawUtil);
+        eventBus.register(commandQueue);
+    }
 
     public static Seraph getInstance() {
         return instance;
     }
 
-    @Mod.EventHandler
-    protected void onInitialization(FMLInitializationEvent event) {
-        // registering and loading configs and commands.
-        new SeraphCommand().register();
-        Vigilance.initialize();
-        this.config = new SeraphConfig();
-        this.config.preload();
-        registerListeners(new ApiKeyListener(), new QueueListener());
+    public SeraphConfig getConfig() {
+        return this.config;
     }
 
-    // registering listeners to be used.
-    public static void registerListeners(Object... objects) {
-        for (Object o : objects) {
-            MinecraftForge.EVENT_BUS.register(o);
-        }
+    public CommandQueue getCommandQueue() {
+        return this.commandQueue;
     }
-    // instance of the config.
-    public SeraphConfig getConfig() {
-        return config;
+
+    public LocrawInfo getLocrawInfo() {
+        return this.locrawInfo;
+    }
+
+    public LocrawUtil getLocrawUtil() {
+        return this.locrawUtil;
     }
 
 }

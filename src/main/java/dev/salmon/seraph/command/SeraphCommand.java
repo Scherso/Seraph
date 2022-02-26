@@ -34,11 +34,11 @@ public class SeraphCommand extends Command {
 
         // if the player set's an api key, the config set that key, and sends a message so the user knows their api key has been set.
             Seraph.getInstance().getConfig().setApiKey(apikey);
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.Prefix.SeraphPrefix + ChatColor.GRAY + "The API key " + apikey + " has been added to Seraph's config."));
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GRAY + "The API key " + apikey + " has been added to Seraph's config."));
 
             // if their api key is empty, there is no key set, and a message to remind the user how to set an api key.
             if (emptyApiKey) {
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.Prefix.SeraphPrefix + ChatColor.RED + "Your API key cannot be null. /seraph apikey <apikey>"));
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Your API key cannot be null. /seraph apikey <apikey>"));
         }
     }
 
