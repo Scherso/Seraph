@@ -32,10 +32,10 @@ public class Seraph {
         this.config = new SeraphConfig();
         this.config.preload();
 
-        registerHandlers();
+        registerListeners();
     }
 
-    private void registerHandlers() {
+    private void registerListeners() {
         final EventBus eventBus = MinecraftForge.EVENT_BUS;
 
         eventBus.register(new ApiKeyListener());
