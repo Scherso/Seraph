@@ -1,3 +1,3 @@
 # Seraph
 
-The old days are back. 
+guys i swear i know java
