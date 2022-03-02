@@ -9,7 +9,7 @@ public class LocrawInfo {
     private String serverId;
 
     @SerializedName("mode")
-    private final String gameMode = "lobby";
+    private String gameMode = "lobby";
 
     @SerializedName("map")
     private String mapName;
@@ -19,7 +19,6 @@ public class LocrawInfo {
     private GameType gameType;
 
     public enum GameType {
-
         UNKNOWN(""),
         LIMBO("LIMBO"),
         BEDWARS("BEDWARS"),
