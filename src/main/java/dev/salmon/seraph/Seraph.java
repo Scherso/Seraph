@@ -2,6 +2,7 @@ package dev.salmon.seraph;
 
 import dev.salmon.seraph.command.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
+import dev.salmon.seraph.listener.LocrawListener;
 import dev.salmon.seraph.listener.QueueListener;
 import dev.salmon.seraph.listener.ApiKeyListener;
 import dev.salmon.seraph.util.CommandQueue;
@@ -11,6 +12,7 @@ import gg.essential.universal.ChatColor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
 
 @Mod(modid = Seraph.ID, name = Seraph.NAME, version = Seraph.VER)
@@ -32,16 +34,19 @@ public class Seraph {
         this.config = new SeraphConfig();
         this.config.preload();
 
-        registerListeners();
+        this.registerListeners(
+                new ApiKeyListener(),
+                new QueueListener(),
+                this.locrawUtil,
+                this.commandQueue,
+                new LocrawListener()
+        );
     }
 
-    private void registerListeners() {
-        final EventBus eventBus = MinecraftForge.EVENT_BUS;
-
-        eventBus.register(new ApiKeyListener());
-        eventBus.register(new QueueListener());
-        eventBus.register(locrawUtil);
-        eventBus.register(commandQueue);
+    public void registerListeners(Object... listeners) {
+        for (Object listener : listeners) {
+            MinecraftForge.EVENT_BUS.register(listener);
+        }
     }
 
     public static Seraph getInstance() {
