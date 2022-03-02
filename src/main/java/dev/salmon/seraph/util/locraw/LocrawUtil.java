@@ -22,6 +22,7 @@ public class LocrawUtil implements ChatReceieveHelper {
     private LocrawInfo locraw;
     private boolean sentCommand = false;
     private boolean listening;
+    private boolean ingame;
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
@@ -60,10 +61,14 @@ public class LocrawUtil implements ChatReceieveHelper {
                         event.setCanceled(true);
                     }
 
-                    if (this.locraw.getGameMode().equals("lobby"))
+                    if (this.locraw.getGameMode().equals("lobby")) {
+                        this.ingame = false;
                         MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(this.locraw));
-                    else
+                    }
+                    else {
+                        this.ingame = true;
                         MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
+                    }
 
                     this.sentCommand = false;
                     this.listening = false;
@@ -76,6 +81,8 @@ public class LocrawUtil implements ChatReceieveHelper {
     public boolean isEnabled() {
         return this.listening;
     }
+
+    public boolean isInGame() { return this.ingame; }
 
     public LocrawInfo getLocrawInfo() {
         return this.locraw;

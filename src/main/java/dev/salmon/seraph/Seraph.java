@@ -5,6 +5,7 @@ import dev.salmon.seraph.config.SeraphConfig;
 import dev.salmon.seraph.listener.LocrawListener;
 import dev.salmon.seraph.listener.QueueListener;
 import dev.salmon.seraph.listener.ApiKeyListener;
+import dev.salmon.seraph.listener.PlayerGrabberListener;
 import dev.salmon.seraph.util.CommandQueue;
 import dev.salmon.seraph.util.locraw.LocrawInfo;
 import dev.salmon.seraph.util.locraw.LocrawUtil;
@@ -12,8 +13,6 @@ import gg.essential.universal.ChatColor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.EventBus;
 
 @Mod(modid = Seraph.ID, name = Seraph.NAME, version = Seraph.VER)
 public class Seraph {
@@ -39,7 +38,8 @@ public class Seraph {
                 new QueueListener(),
                 this.locrawUtil,
                 this.commandQueue,
-                new LocrawListener()
+                new LocrawListener(),
+                new PlayerGrabberListener()
         );
     }
 
