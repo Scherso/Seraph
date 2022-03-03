@@ -26,7 +26,7 @@ public class LocrawUtil implements ChatReceieveHelper {
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || HypixelUtil.isHypixel() || this.tick >= 22) return;
+        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !HypixelUtil.isHypixel() || this.tick >= 22) return;
 
         this.tick++;
         if (this.tick == 20) {

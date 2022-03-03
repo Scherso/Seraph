@@ -5,13 +5,11 @@ import dev.salmon.seraph.util.Handler;
 import dev.salmon.seraph.util.chat.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.MinecraftForge;
-import tv.twitch.chat.Chat;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +33,7 @@ public class SeraphCommand extends CommandBase {
         return true;
     }
 
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+    public void processCommand(ICommandSender sender, String[] args) {
 
         if (args.length > 0) {
             switch (args[0].toLowerCase()) {
@@ -65,4 +63,5 @@ public class SeraphCommand extends CommandBase {
             Handler.schedule(() -> Minecraft.getMinecraft().displayGuiScreen(Seraph.Instance.getConfig().gui()), 100, TimeUnit.MILLISECONDS);
         }
     }
+
 }

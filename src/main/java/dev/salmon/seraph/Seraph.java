@@ -3,7 +3,6 @@ package dev.salmon.seraph;
 import dev.salmon.seraph.command.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
 import dev.salmon.seraph.listener.LocrawListener;
-import dev.salmon.seraph.listener.QueueListener;
 import dev.salmon.seraph.listener.ApiKeyListener;
 import dev.salmon.seraph.listener.PlayerGrabberListener;
 import dev.salmon.seraph.util.CommandQueue;
@@ -37,7 +36,6 @@ public class Seraph {
 
         registerListeners(
                 new ApiKeyListener(),
-                new QueueListener(),
                 this.locrawUtil,
                 this.commandQueue,
                 new LocrawListener(),
