@@ -1,6 +1,5 @@
 package dev.salmon.seraph.util.locraw;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 public class LocrawInfo {

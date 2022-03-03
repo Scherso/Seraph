@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 
 public class JsonRequest {
 
-    private final String key = Seraph.getInstance().getConfig().getApiKey();
+    private final String key = Seraph.Instance.getConfig().getApiKey();
     public JsonObject achievementObj;
     public JsonObject playerObject;
 

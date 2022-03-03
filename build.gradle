@@ -40,11 +40,9 @@ repositories {
 }
 
 dependencies {
-    // essential...
-    shade ("gg.essential:loader-launchwrapper:${essentialVersion}") {
-        transitive = false
-    }
-    implementation 'gg.essential:essential-1.8.9-forge:1626+release-launch'
+    // vigilance & mojang api...
+    implementation("gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}")
+    compileOnly "com.github.KevinPriv:MojangAPI:1.0"
 
     // mixins...
     compileOnly(annotationProcessor("org.spongepowered:mixin:${spongePoweredMixinVersion}"))
