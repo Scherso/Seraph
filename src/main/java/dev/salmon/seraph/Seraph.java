@@ -9,7 +9,8 @@ import dev.salmon.seraph.listener.PlayerGrabberListener;
 import dev.salmon.seraph.util.CommandQueue;
 import dev.salmon.seraph.util.locraw.LocrawInfo;
 import dev.salmon.seraph.util.locraw.LocrawUtil;
-import gg.essential.universal.ChatColor;
+import dev.salmon.seraph.util.chat.ChatColor;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -20,8 +21,10 @@ public class Seraph {
     public static final String NAME = "@NAME@", VER = "@VER@", ID = "@ID@";
     public static String SeraphPrefix = ChatColor.GOLD + "Seraph " + ChatColor.DARK_GRAY + "» ";
 
-    @SuppressWarnings("unused")
-    @Mod.Instance private static Seraph instance;
+
+    @Mod.Instance(ID)
+    public static Seraph Instance;
+
     private SeraphConfig config;
     private final CommandQueue commandQueue = new CommandQueue();
     private final LocrawInfo locrawInfo = new LocrawInfo();
@@ -29,11 +32,10 @@ public class Seraph {
 
     @Mod.EventHandler
     protected void onInitialization(FMLInitializationEvent event) {
-        new SeraphCommand().register();
         this.config = new SeraphConfig();
         this.config.preload();
 
-        this.registerListeners(
+        registerListeners(
                 new ApiKeyListener(),
                 new QueueListener(),
                 this.locrawUtil,
@@ -41,16 +43,13 @@ public class Seraph {
                 new LocrawListener(),
                 new PlayerGrabberListener()
         );
+        ClientCommandHandler.instance.registerCommand(new SeraphCommand());
     }
 
-    public void registerListeners(Object... listeners) {
-        for (Object listener : listeners) {
-            MinecraftForge.EVENT_BUS.register(listener);
+    public static void registerListeners(Object... objects) {
+        for (Object o : objects) {
+            MinecraftForge.EVENT_BUS.register(o);
         }
-    }
-
-    public static Seraph getInstance() {
-        return instance;
     }
 
     public SeraphConfig getConfig() {

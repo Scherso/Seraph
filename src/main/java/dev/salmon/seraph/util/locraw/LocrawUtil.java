@@ -3,8 +3,8 @@ package dev.salmon.seraph.util.locraw;
 import com.google.gson.Gson;
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.listener.event.LocrawEvent;
+import dev.salmon.seraph.util.HypixelUtil;
 import dev.salmon.seraph.util.chat.ChatReceieveHelper;
-import gg.essential.api.EssentialAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,12 +26,12 @@ public class LocrawUtil implements ChatReceieveHelper {
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !EssentialAPI.getMinecraftUtil().isHypixel() || this.tick >= 22) return;
+        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || HypixelUtil.isHypixel() || this.tick >= 22) return;
 
         this.tick++;
         if (this.tick == 20) {
             this.listening = true;
-            Seraph.getInstance().getCommandQueue().queue("/locraw");
+            Seraph.Instance.getCommandQueue().queue("/locraw");
         }
     }
 

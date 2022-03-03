@@ -8,12 +8,12 @@ import net.minecraft.util.ChatComponentText;
 public class QueueListener {
     public boolean hasQueued;
 
-    LocrawInfo locrawInfo = Seraph.getInstance().getLocrawInfo();
+    LocrawInfo locrawInfo = Seraph.Instance.getLocrawUtil().getLocrawInfo();
 
     // this doesn't work i'm just commiting it
     public void sendMessageOnQueue() {
 
-        hasQueued = (locrawInfo.getGameType().name().equals("DUELS") && locrawInfo.getMapName() != null && locrawInfo.getGameMode() != null);
+        hasQueued = (locrawInfo.getGameType() == LocrawInfo.GameType.DUELS && locrawInfo.getMapName() != null && locrawInfo.getGameMode() != null);
 
         Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("you have queued."));
     }

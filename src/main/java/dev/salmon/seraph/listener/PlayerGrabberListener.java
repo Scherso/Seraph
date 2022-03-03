@@ -19,7 +19,7 @@ public class PlayerGrabberListener {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if (Seraph.getInstance().getLocrawUtil().isInGame()) {
+        if (Seraph.Instance.getLocrawUtil().isInGame()) {
             for (ScorePlayerTeam team : Minecraft.getMinecraft().theWorld.getScoreboard().getTeams()) {
                 for (String playerName : team.getMembershipCollection()) {
                     /* All possible player's have a team prefix with the obfuscated color code */

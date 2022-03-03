@@ -26,7 +26,7 @@ interface ChatHelper {
 
     @Nullable
     default LocrawInfo getLowcraw() {
-        return Seraph.getInstance().getLocrawInfo();
+        return Seraph.Instance.getLocrawInfo();
     }
 
     default String getStrippedMessage(IChatComponent component) {
