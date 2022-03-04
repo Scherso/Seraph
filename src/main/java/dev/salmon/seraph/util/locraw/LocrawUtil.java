@@ -3,7 +3,7 @@ package dev.salmon.seraph.util.locraw;
 import com.google.gson.Gson;
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.listener.event.LocrawEvent;
-import dev.salmon.seraph.util.HypixelUtil;
+import dev.salmon.seraph.util.Utils;
 import dev.salmon.seraph.util.chat.ChatReceieveHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -23,10 +23,11 @@ public class LocrawUtil implements ChatReceieveHelper {
     private boolean sentCommand = false;
     private boolean listening;
     private boolean ingame;
+    private boolean inDuelsGame;
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !HypixelUtil.isHypixel() || this.tick >= 22) return;
+        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !Utils.isHypixel()|| this.tick >= 22) return;
 
         this.tick++;
         if (this.tick == 20) {
@@ -61,6 +62,17 @@ public class LocrawUtil implements ChatReceieveHelper {
                         event.setCanceled(true);
                     }
 
+                    /*
+                    checking if a player is in duels queue
+                     */
+                    if (!this.locraw.getGameMode().equals("lobby") && this.locraw.getGameType() == LocrawInfo.GameType.DUELS) {
+                        this.inDuelsGame = true;
+                        MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
+                    }
+
+                    /*
+                    checking if a player is in the queue of any hypixel mini-game
+                     */
                     if (this.locraw.getGameMode().equals("lobby")) {
                         this.ingame = false;
                         MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(this.locraw));
@@ -83,6 +95,10 @@ public class LocrawUtil implements ChatReceieveHelper {
     }
 
     public boolean isInGame() { return this.ingame; }
+
+    public boolean isInDuelsGame() {
+        return this.inDuelsGame;
+    }
 
     public LocrawInfo getLocrawInfo() {
         return this.locraw;
