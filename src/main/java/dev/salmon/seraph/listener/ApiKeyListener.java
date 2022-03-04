@@ -2,11 +2,12 @@ package dev.salmon.seraph.listener;
 
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.util.Handler;
-import dev.salmon.seraph.util.HypixelUtil;
+import dev.salmon.seraph.util.Utils;
 import dev.salmon.seraph.util.chat.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,7 @@ public class ApiKeyListener {
     public void onChat(ClientChatReceivedEvent event) {
         String message = event.message.getUnformattedText();
         // checking to see if the chat message the player received is Hypixel's api key message.
-        if (message.startsWith("Your new API key is ") && HypixelUtil.isHypixel()) {
+        if (message.startsWith("Your new API key is ") && Utils.isHypixel()) {
             // if it is, the key is grabbed.
             String apiKey = message.replace("Your new API key is ", "");
             Seraph.Instance.getConfig().setApiKey(apiKey);

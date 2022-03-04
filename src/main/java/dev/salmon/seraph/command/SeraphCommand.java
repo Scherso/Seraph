@@ -51,13 +51,17 @@ public class SeraphCommand extends CommandBase {
 
                 case "getapikey":
                 case "getkey":
-                    IChatComponent text = new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GREEN + Seraph.Instance.getConfig().getApiKey());
-                    HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(ChatColor.YELLOW + "Click to add your API key to your chat box."));
-                    ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, Seraph.Instance.getConfig().getApiKey());
+                    if (Seraph.Instance.getConfig().getApiKey().isEmpty()) {
+                        sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "You must set an API key!"));
+                    } else {
+                        IChatComponent text = new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GREEN + Seraph.Instance.getConfig().getApiKey());
+                        HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(ChatColor.YELLOW + "Click to add your API key to your chat box."));
+                        ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, Seraph.Instance.getConfig().getApiKey());
 
-                    text.getChatStyle().setChatHoverEvent(hoverEvent).setChatClickEvent(clickEvent);
+                        text.getChatStyle().setChatHoverEvent(hoverEvent).setChatClickEvent(clickEvent);
 
-                    sender.addChatMessage(text);
+                        sender.addChatMessage(text);
+                    }
                     break;
 
                 case "info":

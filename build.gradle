@@ -41,7 +41,7 @@ repositories {
 
 dependencies {
     // vigilance & mojang api...
-    implementation("gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}")
+    shade("gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}")
     compileOnly "com.github.KevinPriv:MojangAPI:1.0"
 
     // mixins...
@@ -101,6 +101,7 @@ mixin {
 shadowJar {
     configurations = [project.configurations.shade]
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
+    relocate("gg.essential.vigilance", "dev.salmon.seraph")
 
     archiveClassifier.set("")
 }

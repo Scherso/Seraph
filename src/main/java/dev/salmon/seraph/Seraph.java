@@ -20,7 +20,6 @@ public class Seraph {
     public static final String NAME = "@NAME@", VER = "@VER@", ID = "@ID@";
     public static String SeraphPrefix = ChatColor.GOLD + "Seraph " + ChatColor.DARK_GRAY + "» ";
 
-
     @Mod.Instance(ID)
     public static Seraph Instance;
 
