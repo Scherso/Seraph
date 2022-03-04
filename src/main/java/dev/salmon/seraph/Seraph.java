@@ -41,6 +41,7 @@ public class Seraph {
                 new LocrawListener(),
                 new PlayerGrabberListener()
         );
+
         ClientCommandHandler.instance.registerCommand(new SeraphCommand());
     }
 

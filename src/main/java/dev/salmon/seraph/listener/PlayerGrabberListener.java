@@ -23,7 +23,7 @@ public class PlayerGrabberListener {
             for (ScorePlayerTeam team : Minecraft.getMinecraft().theWorld.getScoreboard().getTeams()) {
                 for (String playerName : team.getMembershipCollection()) {
                     /* All possible player's have a team prefix with the obfuscated color code */
-                    if (!this.playerList.contains(playerName) && team.getColorPrefix().equals("§7§k")) {
+                    if (!this.playerList.contains(playerName) && team.getColorPrefix().equals("§7§k") && !playerName.equals(Minecraft.getMinecraft().thePlayer.getGameProfile().getName())) {
                         /* Add to the player list, so we don't try and resolve the player infinitely */
                         this.playerList.add(playerName);
                         Handler.asExecutor(()-> {
