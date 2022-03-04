@@ -24,7 +24,7 @@ minecraft {
 
     // JVM args...
     clientRunArgs += "--mixin mixins.${projectId}.json"
-    clientRunArgs += '--tweakClass gg.essential.loader.stage0.EssentialSetupTweaker'
+    clientRunArgs += "--tweakClass org.spongepowered.asm.launch.MixinTweaker"
 }
 
 configurations {
@@ -85,7 +85,7 @@ jar {
     manifest.attributes(
             'ModSide': 'CLIENT',
             'ForceLoadAsMod': true,
-            'TweakClass': 'gg.essential.loader.stage0.EssentialSetupTweaker',
+            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
             'MixinConfigs': "mixins.${projectId}.json"
     )
 

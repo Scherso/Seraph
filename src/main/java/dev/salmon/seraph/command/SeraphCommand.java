@@ -1,19 +1,20 @@
 package dev.salmon.seraph.command;
 
 import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.util.Handler;
 import dev.salmon.seraph.util.chat.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class SeraphCommand extends CommandBase {
 
@@ -48,6 +49,17 @@ public class SeraphCommand extends CommandBase {
                         }
                         break;
 
+                case "getapikey":
+                case "getkey":
+                    IChatComponent text = new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GREEN + Seraph.Instance.getConfig().getApiKey());
+                    HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(ChatColor.YELLOW + "Click to add your API key to your chat box."));
+                    ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, Seraph.Instance.getConfig().getApiKey());
+
+                    text.getChatStyle().setChatHoverEvent(hoverEvent).setChatClickEvent(clickEvent);
+
+                    sender.addChatMessage(text);
+                    break;
+
                 case "info":
                     IChatComponent mainComponent = new ChatComponentText(ChatColor.WHITE + "Credits (hover!)");
                     IChatComponent hoverComponent = new ChatComponentText(ChatColor.WHITE + "Credits:\n" + ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso" + ChatColor.GRAY + " Original creator.\n" + ChatColor.AQUA + "[MVP" + ChatColor.GREEN + "+" + ChatColor.AQUA + "] KnightsWhoSayNi_" + ChatColor.GRAY + " Answering " + ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso's" + ChatColor.GRAY + " dumb questions.\n" + ChatColor.GREEN + "[VIP] exejar" + ChatColor.GRAY + " Hypixel API lib (ChampStats), original idea and naming.");
@@ -57,11 +69,19 @@ public class SeraphCommand extends CommandBase {
 
                     sender.addChatMessage(mainComponent);
                     break;
+                default:
+                    sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Incorrect usage, /seraph, /seraph setapikey <key>, /seraph info"));
+                    break;
             }
         } else {
             MinecraftForge.EVENT_BUS.register(this);
-            Handler.schedule(() -> Minecraft.getMinecraft().displayGuiScreen(Seraph.Instance.getConfig().gui()), 100, TimeUnit.MILLISECONDS);
         }
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent.ClientTickEvent event) {
+        MinecraftForge.EVENT_BUS.unregister(this);
+        Minecraft.getMinecraft().displayGuiScreen(Seraph.Instance.getConfig().gui());
     }
 
 }
