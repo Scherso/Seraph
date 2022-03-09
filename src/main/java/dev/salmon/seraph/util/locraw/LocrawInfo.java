@@ -17,6 +17,48 @@ public class LocrawInfo {
     private String rawGameType;
     private GameType gameType;
 
+    /**
+     * @return The serverID of the server you are currently on, ex: mini121
+     */
+    public String getServerId() {
+        return serverId;
+    }
+
+    /**
+     * @return The GameType of the server as a String.
+     */
+    public String getRawGameType() {
+        return rawGameType;
+    }
+
+    /**
+     * @return The GameMode of the server, ex: solo_insane
+     */
+    public String getGameMode() {
+        return gameMode;
+    }
+
+    /**
+     * @return The GameType of the server as an Enum.
+     */
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    /**
+     * @param gameType The GameType to set it to.
+     */
+    public void setGameType(GameType gameType) {
+        this.gameType = gameType;
+    }
+
+    /**
+     * @return The map of the server, ex: Shire.
+     */
+    public String getMapName() {
+        return mapName;
+    }
+
     public enum GameType {
         UNKNOWN(""),
         LIMBO("LIMBO"),
@@ -41,8 +83,8 @@ public class LocrawInfo {
         SMASH_HEROES("SUPER_SMASH"),
         WARLORDS("BATTLEGROUND");
 
-        private final String serverName;
         private static final GameType[] typeArray = values();
+        private final String serverName;
 
         GameType(String serverName) {
             this.serverName = serverName;
@@ -62,48 +104,6 @@ public class LocrawInfo {
             return serverName;
         }
 
-    }
-
-    /**
-     * @return The serverID of the server you are currently on, ex: mini121
-     */
-    public String getServerId() {
-        return serverId;
-    }
-
-    /**
-     * @return The GameType of the server as a String.
-     */
-    public String getRawGameType() {
-        return rawGameType;
-    }
-
-    /**
-     * @return The GameMode of the server, ex: solo_insane
-     */
-    public String getGameMode() {
-        return gameMode;
-    }
-
-    /**
-     * @param gameType The GameType to set it to.
-     */
-    public void setGameType(GameType gameType) {
-        this.gameType = gameType;
-    }
-
-    /**
-     * @return The GameType of the server as an Enum.
-     */
-    public GameType getGameType() {
-        return gameType;
-    }
-
-    /**
-     * @return The map of the server, ex: Shire.
-     */
-    public String getMapName() {
-        return mapName;
     }
 
 }
