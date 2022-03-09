@@ -19,8 +19,8 @@
 
 <details>
   <summary>
-    Installation</summary>
-  
+       Installation</summary>
+     
   ## Installation Guide
   1. **Install Minecraft 1.8.9**
   2. **Install the [Forge Loader for 1.8.9](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html)**
@@ -31,8 +31,9 @@
 
 <details>
   <summary>
-    Commands</summary>
+       Commands</summary>
   
+  ## Commands
   - `/seraph` Opens the configuration screen.
   - `/seraph info` Sends a chat message with information regarding Seraph.
   - `/seraph setapikey` Allows you to set your Hypixel API key without running `/api new`
@@ -45,6 +46,7 @@
   <summary>
     Features</summary>
   
+  ## Features
   - Queue stats post duels update.
   - Autododge soon ™
   - literally everything else soon ™
