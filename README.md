@@ -1,3 +1,56 @@
-# Seraph
+<img 
+     align="center" alt="title"  
+     src="https://github.com/Scherso/Seraph/blob/master/.github/title.png" 
+/>
 
-guys i swear i know java
+<img 
+     align="right" alt="Logo" width="200px" 
+     src="https://github.com/Scherso/Seraph/blob/master/src/main/resources/seraph.png" 
+/>
+
+### Seraph Mod, Duels Utilities for 1.8.9
+
+<img
+     align="left" alt="Worlflow Badge"
+     src="https://github.com/Scherso/Seraph/actions/workflows/gradle.yml/badge.svg"
+/>
+
+---
+
+<details>
+  <summary>
+    Installation</summary>
+  
+  ## Installation Guide
+  1. **Install Minecraft 1.8.9**
+  2. **Install the [Forge Loader for 1.8.9](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html)**
+  3. **Install the [latest Seraph version](https://youtu.be/dQw4w9WgXcQ)**
+  4. **Place the mod in your `minecraft/mods/` directory**
+  
+</details>
+
+<details>
+  <summary>
+    Commands</summary>
+  
+  - `/seraph` Opens the configuration screen.
+  - `/seraph info` Sends a chat message with information regarding Seraph.
+  - `/seraph setapikey` Allows you to set your Hypixel API key without running `/api new`
+  - `/seraph getapikey` Sends a chat message with your api key, upon clicking you can copy it.
+  - Sending a message with an invalid subcommand will send command usages.
+  
+</details>
+
+<details>
+  <summary>
+    Features</summary>
+  
+  - Queue stats post duels update.
+  - Autododge soon ™
+  - literally everything else soon ™
+  
+</details>
+
+<!--
+
+-->
