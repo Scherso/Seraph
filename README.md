@@ -25,7 +25,7 @@
   1. **Install Minecraft 1.8.9**
   2. **Install the [Forge Loader for 1.8.9](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html)**
   3. **Install the [latest Seraph version](https://youtu.be/dQw4w9WgXcQ)**
-  4. **Place the mod in your `minecraft/mods/` directory**
+  4. **Place the mod in your `minecraft/mods` directory**
   
 </details>
 
