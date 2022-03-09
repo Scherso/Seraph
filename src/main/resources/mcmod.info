@@ -8,11 +8,13 @@
         "url": "https://github.com/Scherso/Seraph",
         "updateUrl": "",
         "authorList": [
-            "Salmon, Max"
+            "Salmon", "Max"
         ],
         "credits": "",
-        "logoFile": "",
+        "logoFile": "seraph.png",
         "screenshots": [],
-        "dependencies": []
+        "dependencies": [
+            "Vigilance", "MojangAPI"
+        ]
     }
 ]

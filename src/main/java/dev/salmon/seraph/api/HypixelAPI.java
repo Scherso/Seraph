@@ -4,10 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.api.exception.ApiRequestException;
-import dev.salmon.seraph.api.exception.BadJsonException;
-import dev.salmon.seraph.api.exception.InvalidKeyException;
-import dev.salmon.seraph.api.exception.PlayerNullException;
+import dev.salmon.seraph.api.exception.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -19,11 +16,66 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
-public class JsonRequest {
+public class HypixelAPI {
 
-    private final String key = Seraph.Instance.getConfig().getApiKey();
+    private static final String key = Seraph.Instance.getConfig().getApiKey();
     public JsonObject achievementObj;
     public JsonObject playerObject;
+
+    /**
+     * @param wholeObject Target Player's Hypixel API Whole Object
+     * @param game        Game Stats to retrieve
+     * @return JsonObject of the specified gameType's Stats
+     */
+    public static JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
+        JsonObject player = wholeObject.get("player").getAsJsonObject();
+        JsonObject stats = player.get("stats").getAsJsonObject();
+
+        if (stats.get(game.getApiName()) != null) {
+            return stats.get(game.getApiName()).getAsJsonObject();
+        } else {
+            throw new GameNullException(game);
+        }
+    }
+
+    public static String getUUID(String name) {
+        String uuid = "";
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", uuid));
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                uuid = object.get("id").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return uuid;
+    }
+
+    public static String getDuelsWins(String uuid) {
+        String wins = "";
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid.replace("-", ""));
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(requestURL);
+
+            System.out.println("Stat checking " + uuid);
+
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                wins = object.get("bridge_duel_wins").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return wins;
+    }
 
     /**
      * @param uuid Target player's UUID
@@ -56,10 +108,10 @@ public class JsonRequest {
                 }
 
                 if (obj.get("player") == null) {
-                    if (obj.get("cause").getAsString().equalsIgnoreCase("Invalid API key")) throw new InvalidKeyException();
+                    if (obj.get("cause").getAsString().equalsIgnoreCase("Invalid API key"))
+                        throw new InvalidKeyException();
                     throw new PlayerNullException();
-                }
-                else if (obj.get("player").toString().equalsIgnoreCase("null"))
+                } else if (obj.get("player").toString().equalsIgnoreCase("null"))
                     throw new PlayerNullException();
                 else if (obj.get("success").getAsString().equals("false"))
                     throw new ApiRequestException();
@@ -76,25 +128,6 @@ public class JsonRequest {
         /* TODO Kind of Redundant */
         this.playerObject = player;
         return obj;
-    }
-
-    // this isn't really useful but i think i might need it
-    public static String getUUID(String name) {
-        String uuid = "";
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", uuid));
-            try (InputStream is = client.execute(request).getEntity().getContent()) {
-                JsonParser jsonParser = new JsonParser();
-                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                uuid = object.get("id").getAsString();
-            } catch (NullPointerException ex) {
-                ex.printStackTrace();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return uuid;
     }
 
 }

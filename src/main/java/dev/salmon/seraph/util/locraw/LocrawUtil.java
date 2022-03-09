@@ -27,7 +27,8 @@ public class LocrawUtil implements ChatReceieveHelper {
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !Utils.isHypixel()|| this.tick >= 22) return;
+        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !Utils.isHypixel() || this.tick >= 22)
+            return;
 
         this.tick++;
         if (this.tick == 20) {
@@ -76,8 +77,7 @@ public class LocrawUtil implements ChatReceieveHelper {
                     if (this.locraw.getGameMode().equals("lobby")) {
                         this.ingame = false;
                         MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(this.locraw));
-                    }
-                    else {
+                    } else {
                         this.ingame = true;
                         MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
                     }
@@ -86,7 +86,8 @@ public class LocrawUtil implements ChatReceieveHelper {
                     this.listening = false;
                 }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
@@ -94,7 +95,9 @@ public class LocrawUtil implements ChatReceieveHelper {
         return this.listening;
     }
 
-    public boolean isInGame() { return this.ingame; }
+    public boolean isInGame() {
+        return this.ingame;
+    }
 
     public boolean isInDuelsGame() {
         return this.inDuelsGame;

@@ -2,13 +2,14 @@ package dev.salmon.seraph;
 
 import dev.salmon.seraph.command.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
-import dev.salmon.seraph.listener.LocrawListener;
 import dev.salmon.seraph.listener.ApiKeyListener;
+import dev.salmon.seraph.listener.LocrawListener;
 import dev.salmon.seraph.listener.PlayerGrabberListener;
 import dev.salmon.seraph.util.CommandQueue;
+import dev.salmon.seraph.util.chat.ChatColor;
 import dev.salmon.seraph.util.locraw.LocrawInfo;
 import dev.salmon.seraph.util.locraw.LocrawUtil;
-import dev.salmon.seraph.util.chat.ChatColor;
+import gg.essential.vigilance.Vigilance;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -22,14 +23,20 @@ public class Seraph {
 
     @Mod.Instance(ID)
     public static Seraph Instance;
-
-    private SeraphConfig config;
     private final CommandQueue commandQueue = new CommandQueue();
     private final LocrawInfo locrawInfo = new LocrawInfo();
     private final LocrawUtil locrawUtil = new LocrawUtil();
+    private SeraphConfig config;
+
+    public static void registerListeners(Object... objects) {
+        for (Object o : objects) {
+            MinecraftForge.EVENT_BUS.register(o);
+        }
+    }
 
     @Mod.EventHandler
     protected void onInitialization(FMLInitializationEvent event) {
+        Vigilance.initialize();
         this.config = new SeraphConfig();
         this.config.preload();
 
@@ -42,12 +49,6 @@ public class Seraph {
         );
 
         ClientCommandHandler.instance.registerCommand(new SeraphCommand());
-    }
-
-    public static void registerListeners(Object... objects) {
-        for (Object o : objects) {
-            MinecraftForge.EVENT_BUS.register(o);
-        }
     }
 
     public SeraphConfig getConfig() {

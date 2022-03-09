@@ -1,7 +1,7 @@
 package dev.salmon.seraph.listener;
 
 import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.util.Handler;
+import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.Utils;
 import dev.salmon.seraph.util.chat.ChatColor;
 import net.minecraft.client.Minecraft;
@@ -23,7 +23,7 @@ public class ApiKeyListener {
             Seraph.Instance.getConfig().setApiKey(apiKey);
             //checking to see if it has been set.
             if (Seraph.Instance.getConfig().getApiKey().equals(apiKey)) {
-                Handler.schedule(() -> Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GRAY + "Your API key has been found, and added to Seraph's config.")), 100, TimeUnit.MILLISECONDS);
+                Multithreading.schedule(() -> Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GRAY + "Your API key has been found, and added to Seraph's config.")), 100, TimeUnit.MILLISECONDS);
             } else {
                 Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "An error occurred, and your API key was not added to Seraph's config, try again.\nAlso, you can manually add it yourself in the config menu, /seraph, or run /seraph apikey <apikey>"));
             }

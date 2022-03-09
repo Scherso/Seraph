@@ -63,5 +63,7 @@ public enum ChatColor {
         return this.toString;
     }
 
-    public int getRGB() { return this.rgb; }
+    public int getRGB() {
+        return this.rgb;
+    }
 }

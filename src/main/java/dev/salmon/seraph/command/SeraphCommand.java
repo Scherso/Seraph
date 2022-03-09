@@ -41,13 +41,13 @@ public class SeraphCommand extends CommandBase {
 
                 case "setapikey":
                 case "setkey":
-                        if (args.length < 2) {
-                            sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Enter an API key"));
-                        } else {
-                            Seraph.Instance.getConfig().setApiKey(args[1]);
-                            sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GREEN + "Your API key has been saved."));
-                        }
-                        break;
+                    if (args.length < 2) {
+                        sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Enter an API key"));
+                    } else {
+                        Seraph.Instance.getConfig().setApiKey(args[1]);
+                        sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GREEN + "Your API key has been saved."));
+                    }
+                    break;
 
                 case "getapikey":
                 case "getkey":

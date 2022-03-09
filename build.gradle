@@ -40,11 +40,10 @@ repositories {
 }
 
 dependencies {
-    // vigilance & mojang api...
-    shade("gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}")
+    // vigilance & mixins...
+    implementation("gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}")
     compileOnly "com.github.KevinPriv:MojangAPI:1.0"
 
-    // mixins...
     compileOnly(annotationProcessor("org.spongepowered:mixin:${spongePoweredMixinVersion}"))
     annotationProcessor("com.google.code.gson:gson:${gsonVersion}")
     annotationProcessor("com.google.guava:guava:${guavaVersion}")
@@ -76,7 +75,7 @@ task moveResources {
                     todir: "${buildDir}/classes/java"
             )
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 }
@@ -86,7 +85,7 @@ jar {
             'ModSide': 'CLIENT',
             'ForceLoadAsMod': true,
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-            'MixinConfigs': "mixins.${projectId}.json"
+            'MixinConfigs': "mixins.${projectId}.json",
     )
 
     enabled = false
@@ -101,7 +100,6 @@ mixin {
 shadowJar {
     configurations = [project.configurations.shade]
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
-    relocate("gg.essential.vigilance", "dev.salmon.seraph")
 
     archiveClassifier.set("")
 }

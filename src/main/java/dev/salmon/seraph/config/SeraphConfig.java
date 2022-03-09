@@ -6,16 +6,9 @@ import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;
 
-import java.awt.*;
 import java.io.File;
 
 public class SeraphConfig extends Vigilant {
-
-    // setting the file and name of the file. Seraph.NAME will appear at the top of the config screen.
-    public SeraphConfig() {
-        super(new File("./config/Seraph", Seraph.ID + ".toml"), ChatColor.GOLD + Seraph.NAME);
-        initialize();
-    }
 
     @Property(
             type = PropertyType.TEXT,
@@ -28,9 +21,20 @@ public class SeraphConfig extends Vigilant {
     private String apiKey = ""; // cannot initialize a variable with itself ( getApiKey() )
     // todo load apiKey from the toml config, if it exists and is not empty
 
+    // setting the file and name of the file. Seraph.NAME will appear at the top of the config screen.
+    public SeraphConfig() {
+        super(new File("./config/Seraph", Seraph.ID + ".toml"), ChatColor.GOLD + Seraph.NAME);
+        initialize();
+    }
+
     // the api key that will be used.
-    public String getApiKey() { return this.apiKey; }
+    public String getApiKey() {
+        return this.apiKey;
+    }
+
     // set api key method, used in the api key sub command, and api key listener.
-    public void setApiKey(String apiKey) { this.apiKey = apiKey; }
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
 }
