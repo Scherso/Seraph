@@ -27,7 +27,7 @@ public class SeraphCommand extends CommandBase {
     }
 
     public String getCommandUsage(ICommandSender sender) {
-        return "/seraph <subcommand>";
+        return "/" + this.getCommandName() + " <subcommand>";
     }
 
     public boolean canCommandSenderUseCommand(ICommandSender sender) {
@@ -41,12 +41,11 @@ public class SeraphCommand extends CommandBase {
 
                 case "setapikey":
                 case "setkey":
-                    if (args.length < 2) {
+                    if (args.length < 2)
                         sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Enter an API key"));
-                    } else {
+                    else
                         Seraph.Instance.getConfig().setApiKey(args[1]);
                         sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GREEN + "Your API key has been saved."));
-                    }
                     break;
 
                 case "getapikey":
@@ -67,7 +66,6 @@ public class SeraphCommand extends CommandBase {
                 case "info":
                     IChatComponent mainComponent = new ChatComponentText(ChatColor.WHITE + "Credits (hover!)");
                     IChatComponent hoverComponent = new ChatComponentText(ChatColor.WHITE + "Credits:\n" + ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso" + ChatColor.GRAY + " Original creator.\n" + ChatColor.AQUA + "[MVP" + ChatColor.GREEN + "+" + ChatColor.AQUA + "] KnightsWhoSayNi_" + ChatColor.GRAY + " Answering " + ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso's" + ChatColor.GRAY + " dumb questions.\n" + ChatColor.GREEN + "[VIP] exejar" + ChatColor.GRAY + " Hypixel API lib (ChampStats), original idea and naming.");
-
                     HoverEvent hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverComponent);
                     mainComponent.getChatStyle().setChatHoverEvent(hover);
 

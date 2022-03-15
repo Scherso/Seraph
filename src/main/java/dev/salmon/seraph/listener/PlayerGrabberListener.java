@@ -3,7 +3,6 @@ package dev.salmon.seraph.listener;
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.api.HypixelAPI;
 import dev.salmon.seraph.util.Handler;
-import me.kbrewster.mojangapi.MojangAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.ChatComponentText;
@@ -29,8 +28,8 @@ public class PlayerGrabberListener {
                             try {
                                 /* If you can't resolve a UUID from the player name, they aren't a real player */
                                 /* If it's a real player, just print their name for testing */
-                                String uuid = MojangAPI.getUUID(playerName).toString();
-                                String duelsWins = HypixelAPI.getDuelsWins(uuid);
+                                String uuid2 = HypixelAPI.getUUID(playerName);
+                                String duelsWins = HypixelAPI.getDuelsWins(uuid2);
 
 
                                 Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(playerName + " " + duelsWins));
@@ -42,5 +41,6 @@ public class PlayerGrabberListener {
             }
         }
     }
+
 }
 
