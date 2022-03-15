@@ -52,7 +52,3 @@
   - literally everything else soon ™
   
 </details>
-
-<!--
-
--->
