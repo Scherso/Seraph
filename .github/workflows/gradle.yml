@@ -14,20 +14,28 @@ on:
       - 'LICENSE'
       - '.gitignore'
   workflow_dispatch:
+  release:
+    types:
+      - "published"
+
+concurrency:
+  # Maximum of one running workflow per pull request source branch
+  # or branch and run number combination (cancels old run if action is rerun)
+  group: ${{ github.head_ref || format('{0}-{1}', github.ref, github.run_number) }}
+  cancel-in-progress: true
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 8
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: '8'
-          distribution: 'adopt'
+          java-version: '17'
+          distribution: 'temurin'
           cache: gradle
       - name: Build with Gradle
-        run:
-          chmod +x gradlew &&
-          ./gradlew build --no-daemon
+      - run: chmod 755 ./gradlew
+      - run: ./gradlew --no-daemon setupCiWorkspace build
