@@ -1,6 +1,6 @@
 <img 
      align="center" alt="title"  
-     src="https://github.com/Scherso/Seraph/blob/master/.github/title.png" 
+     src="https://github.com/Scherso/Seraph/blob/master/.github/assets/title.png" 
 />
 
 <img 
