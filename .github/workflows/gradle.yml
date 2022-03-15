@@ -23,7 +23,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: '17'
-          distribution: 'azule'
+          distribution: "temurin"
+          java-version: "17"
       - name: Build
-        run: chmod +x ./gradlew ; ./gradlew --no-daemon setupCiWorkspace build
+        run: chmod +x ./gradlew ; ./gradlew build --no-daemon
