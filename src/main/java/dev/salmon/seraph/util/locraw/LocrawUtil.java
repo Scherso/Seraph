@@ -24,27 +24,35 @@ public class LocrawUtil implements ChatReceieveHelper {
     private boolean listening;
     private boolean ingame;
     private boolean inDuelsGame;
+    private boolean isResending;
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !Utils.isHypixel() || this.tick >= 22)
+        if (event.phase != TickEvent.Phase.START || Minecraft.getMinecraft().thePlayer == null || !Utils.isHypixel()) {
             return;
+        }
 
         this.tick++;
-        if (this.tick == 20) {
+        if (this.tick == 20 || this.tick % 500 == 0) {
             this.listening = true;
             Seraph.Instance.getCommandQueue().queue("/locraw");
         }
     }
 
     @SubscribeEvent
-    public void onLoad(WorldEvent.Load event) {
+    public void onWorldLoad(WorldEvent.Load event) {
+        this.locraw = null;
         this.tick = 0;
+        this.isResending = false;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public String onMessageSend(@NotNull String message) {
-        if (message.startsWith("/locraw") && !this.listening && this.tick >= 22) {
-            this.sentCommand = true;
+        if (message.startsWith("/locraw") && !this.listening) {
+            if (this.tick == 22 || this.tick % 500 != 0) {
+                this.sentCommand = true;
+            }
+
         }
         return message;
     }
@@ -52,11 +60,11 @@ public class LocrawUtil implements ChatReceieveHelper {
     @SubscribeEvent
     public void onMessageReceived(@NotNull ClientChatReceivedEvent event) {
         try {
-            final String umsg = event.message.getUnformattedTextForChat();
-            if (umsg.startsWith("{")) {
-                this.locraw = gson.fromJson(umsg, LocrawInfo.class);
-
-                if (this.locraw != null) {
+            final String msg = event.message.getUnformattedTextForChat();
+            if (msg.startsWith("{")) {
+                // Parse the json, and make sure that it's not null.
+                this.locraw = gson.fromJson(msg, LocrawInfo.class);
+                if (locraw != null) {
                     this.locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
 
                     if (!this.sentCommand) {
@@ -82,11 +90,17 @@ public class LocrawUtil implements ChatReceieveHelper {
                         MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
                     }
 
+                    if (!isResending) {
+                        MinecraftForge.EVENT_BUS.post(new LocrawEvent(this.locraw));
+                        isResending = true;
+                    }
+
                     this.sentCommand = false;
                     this.listening = false;
                 }
             }
-        } catch (Exception ignored) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
