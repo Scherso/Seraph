@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 @Mod(modid = Seraph.ID, name = Seraph.NAME, version = Seraph.VER)
 public class Seraph {
 
-    public static final String NAME = "@NAME@", VER = "@VER@", ID = "@ID@";
+    public static final String NAME = "@NAME@", VER = "@VERSION@", ID = "@ID@";
     public static String SeraphPrefix = ChatColor.GOLD + "Seraph " + ChatColor.DARK_GRAY + "» ";
 
     @Mod.Instance(ID)

@@ -38,20 +38,6 @@ public class HypixelAPI {
         }
     }
 
-    public static String getUUID(String name) throws IOException {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", name));
-            try (InputStream is = client.execute(request).getEntity().getContent()) {
-                JsonParser jsonParser = new JsonParser();
-                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get("id").getAsString();
-            } catch (NullPointerException ex) {
-                ex.printStackTrace();
-                return null;
-            }
-        }
-    }
-
     public static String getDuelsWins(String uuid) {
         String wins = "";
         String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid.replace("-", ""));

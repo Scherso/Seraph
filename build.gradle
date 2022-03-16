@@ -18,9 +18,7 @@ compileJava.options.encoding = 'UTF-8'
 
 loom {
     launchConfigs {
-        client {
-            arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
-        }
+        client {}
     }
 
     runConfigs {
@@ -105,4 +103,5 @@ tasks.register("fatJar", ShadowJar).configure {
     configurations = [project.configurations.shade]
 }
 
+jar.manifest.attributes("TweakClass": "org.spongepowered.asm.launch.MixinTweaker")
 assemble.dependsOn(fatJar)
