@@ -39,7 +39,6 @@ public class HypixelAPI {
     }
 
     public static String getDuelsWins(String uuid) {
-        String wins = "";
         String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid.replace("-", ""));
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(requestURL);
@@ -49,14 +48,14 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                wins = object.get("bridge_duel_wins").getAsString();
+                return object.get("bridge_duel_wins").getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return wins;
+        return null;
     }
 
     /**

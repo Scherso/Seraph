@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class LocrawListener {
     @SubscribeEvent
     public void onJoin(LocrawEvent.JoinGame event) {
-        System.out.println("joined game " + event.getLocraw().getGameType().toString());
+        System.out.println("joined gametype: " + event.getLocraw().getGameType().toString() + " mode: " + event.getLocraw().getGameMode());
     }
 
     @SubscribeEvent
