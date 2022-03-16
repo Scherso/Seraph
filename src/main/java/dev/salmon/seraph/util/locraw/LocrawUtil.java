@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.listener.event.LocrawEvent;
 import dev.salmon.seraph.util.Utils;
-import dev.salmon.seraph.util.chat.ChatReceieveHelper;
+import dev.salmon.seraph.util.chat.ChatReceiveHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class LocrawUtil implements ChatReceieveHelper {
+public class LocrawUtil implements ChatReceiveHelper {
 
     private final Gson gson = new Gson();
 
