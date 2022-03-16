@@ -18,7 +18,7 @@ public class PlayerGrabberListener {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if (Seraph.Instance.getLocrawUtil().isInDuelsGame()) {
+        if (Seraph.Instance.getLocrawUtil().isInGame()) {
             for (ScorePlayerTeam team : Minecraft.getMinecraft().theWorld.getScoreboard().getTeams()) {
                 for (String playerName : team.getMembershipCollection()) {
                     /* All possible player's have a team prefix with the obfuscated color code */
@@ -29,11 +29,7 @@ public class PlayerGrabberListener {
                             try {
                                 /* If you can't resolve a UUID from the player name, they aren't a real player */
                                 /* If it's a real player, just print their name for testing */
-                                String uuid = MojangAPI.getUUID(playerName).toString();
-                                String duelsWins = HypixelAPI.getDuelsWins(uuid);
-
-
-                                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(playerName + " " + duelsWins));
+                                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(playerName));
                             } catch (Exception e) {
                             }
                         });
