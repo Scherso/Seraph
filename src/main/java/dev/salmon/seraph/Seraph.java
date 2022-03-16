@@ -9,10 +9,13 @@ import dev.salmon.seraph.util.CommandQueue;
 import dev.salmon.seraph.util.chat.ChatColor;
 import dev.salmon.seraph.util.locraw.LocrawInfo;
 import dev.salmon.seraph.util.locraw.LocrawUtil;
+import net.minecraft.command.ICommand;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
+import java.util.Arrays;
 
 @Mod(modid = Seraph.ID, name = Seraph.NAME, version = Seraph.VER)
 public class Seraph {
@@ -26,12 +29,17 @@ public class Seraph {
     private final CommandQueue commandQueue = new CommandQueue();
     private final LocrawInfo locrawInfo = new LocrawInfo();
     private final LocrawUtil locrawUtil = new LocrawUtil();
+    private final LocrawListener locrawListener = new LocrawListener();
     private SeraphConfig config;
 
     public static void registerListeners(Object... objects) {
         for (Object o : objects) {
             MinecraftForge.EVENT_BUS.register(o);
         }
+    }
+
+    public static void registerCommands(ICommand... command) {
+        Arrays.stream(command).forEachOrdered(ClientCommandHandler.instance::registerCommand);
     }
 
     @Mod.EventHandler
@@ -47,7 +55,9 @@ public class Seraph {
                 new PlayerGrabberListener()
         );
 
-        ClientCommandHandler.instance.registerCommand(new SeraphCommand());
+        registerCommands(
+                new SeraphCommand()
+        );
     }
 
     public SeraphConfig getConfig() {

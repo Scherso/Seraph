@@ -59,7 +59,6 @@ dependencies {
 
     // vigilance & mixins...
     implementation("gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}")
-    compileOnly "com.github.KevinPriv:MojangAPI:1.0"
     compileOnly(annotationProcessor("org.spongepowered:mixin:${spongePoweredMixinVersion}"))
 }
 
