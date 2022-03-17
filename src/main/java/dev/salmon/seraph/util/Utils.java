@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -23,11 +22,6 @@ public class Utils {
         return false;
     }
 
-    public static String addDashes(String uuid) {
-        Pattern STRIPPED_UUID_PATTERN = Pattern.compile("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})");
-        return STRIPPED_UUID_PATTERN.matcher(uuid).replaceAll("$1-$2-$3-$4-$5");
-    }
-
     public static UUID getUUID(String name) {
         UUID uuid = null;
         try (CloseableHttpClient client = HttpClients.createDefault()) {
@@ -35,7 +29,7 @@ public class Utils {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser parser = new JsonParser();
                 JsonObject object = parser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                uuid = UUID.fromString(addDashes(object.get("id").getAsString()));
+                uuid = UUID.fromString(object.get("id").getAsString());
             } catch (NullPointerException ex) {
                 System.out.println("Could Not Retrieve UUID");
                 ex.printStackTrace();
