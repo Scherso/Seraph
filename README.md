@@ -5,7 +5,7 @@
 
 <img 
      align="right" alt="Logo" width="200px" 
-     src="https://github.com/Scherso/Seraph/blob/master/src/main/resources/seraph.png" 
+     src="https://github.com/Scherso/Seraph/blob/master/src/main/resources/assets/seraph.png" 
 />
 
 ### Seraph Mod, Duels Utilities for 1.8.9
