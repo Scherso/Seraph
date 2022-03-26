@@ -34,7 +34,7 @@ public class LocrawUtil implements ChatReceiveHelper {
     private LocrawInfo locraw;
     Gson gson = new Gson();
 
-    public void enqueueUpdate(long interval) {
+    public void queueUpdate(long interval) {
         this.sendPermitted = true;
         Multithreading.schedule(() -> {
             if (this.sendPermitted) {
@@ -51,7 +51,7 @@ public class LocrawUtil implements ChatReceiveHelper {
         if (this.tick % 20 == 0) {
             this.tick = 0;
             if (Utils.isHypixel() && !this.sentCommand) {
-                enqueueUpdate(500);
+                queueUpdate(500);
                 this.sentCommand = true;
             }
         }
@@ -75,7 +75,7 @@ public class LocrawUtil implements ChatReceiveHelper {
             if (msg.startsWith("{")) {
                 if (!Utils.isValidJson(msg)) {
                     if (msg.contains("You are sending too many commands! Please try again in a few seconds.")) {
-                        enqueueUpdate(5000);
+                        queueUpdate(5000);
                     }
                     return;
                 }
@@ -87,7 +87,7 @@ public class LocrawUtil implements ChatReceiveHelper {
                 if (parsed.getGameType() == LocrawInfo.GameType.LIMBO) {
                     this.sentCommand = false;
                     this.limboLoop++;
-                    this.enqueueUpdate(1000);
+                    this.queueUpdate(1000);
                 } else locraw = parsed;
                 this.locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
 
