@@ -42,7 +42,6 @@ public class LocrawUtil {
         }, interval, TimeUnit.MILLISECONDS);
     }
 
-
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         this.tick++;

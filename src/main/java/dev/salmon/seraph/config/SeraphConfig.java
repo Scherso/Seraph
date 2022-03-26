@@ -10,6 +10,12 @@ import java.io.File;
 
 public class SeraphConfig extends Vigilant {
 
+    // setting the file and name of the file. Seraph.NAME will appear at the top of the config screen.
+    public SeraphConfig() {
+        super(new File("./config/Seraph", Seraph.ID + ".toml"), ChatColor.GOLD + Seraph.NAME);
+        initialize();
+    }
+
     @Property(
             type = PropertyType.TEXT,
             name = "API Key",
@@ -19,13 +25,14 @@ public class SeraphConfig extends Vigilant {
             protectedText = true
     )
     private String apiKey = ""; // cannot initialize a variable with itself ( getApiKey() )
-    // todo load apiKey from the toml config, if it exists and is not empty
 
-    // setting the file and name of the file. Seraph.NAME will appear at the top of the config screen.
-    public SeraphConfig() {
-        super(new File("./config/Seraph", Seraph.ID + ".toml"), ChatColor.GOLD + Seraph.NAME);
-        initialize();
-    }
+    @Property(
+            type = PropertyType.SWITCH,
+            name = "Hide Own Name",
+            description = "Hide your name and stats from showing.",
+            category = "General"
+    )
+    private boolean hideName = false;
 
     // the api key that will be used.
     public String getApiKey() {
@@ -35,6 +42,10 @@ public class SeraphConfig extends Vigilant {
     // set api key method, used in the api key sub command, and api key listener.
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
+    }
+
+    public boolean isHideName() {
+        return this.hideName;
     }
 
 }
