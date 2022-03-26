@@ -1,11 +1,11 @@
 package dev.salmon.seraph;
 
+import com.google.gson.Gson;
 import dev.salmon.seraph.command.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
 import dev.salmon.seraph.listener.ApiKeyListener;
 import dev.salmon.seraph.listener.LocrawListener;
 import dev.salmon.seraph.listener.PlayerGrabberListener;
-import dev.salmon.seraph.util.CommandQueue;
 import dev.salmon.seraph.util.chat.ChatColor;
 import dev.salmon.seraph.util.locraw.LocrawInfo;
 import dev.salmon.seraph.util.locraw.LocrawUtil;
@@ -26,10 +26,10 @@ public class Seraph {
     @Mod.Instance(ID)
     public static Seraph Instance;
 
-    private final CommandQueue commandQueue = new CommandQueue();
     private final LocrawInfo locrawInfo = new LocrawInfo();
     private final LocrawUtil locrawUtil = new LocrawUtil();
     private final LocrawListener locrawListener = new LocrawListener();
+    Gson gson;
     private SeraphConfig config;
 
     public static void registerListeners(Object... objects) {
@@ -50,7 +50,6 @@ public class Seraph {
         registerListeners(
                 new ApiKeyListener(),
                 this.locrawUtil,
-                this.commandQueue,
                 new LocrawListener(),
                 new PlayerGrabberListener()
         );
@@ -64,16 +63,16 @@ public class Seraph {
         return this.config;
     }
 
-    public CommandQueue getCommandQueue() {
-        return this.commandQueue;
-    }
-
     public LocrawInfo getLocrawInfo() {
         return this.locrawInfo;
     }
 
     public LocrawUtil getLocrawUtil() {
         return this.locrawUtil;
+    }
+
+    public Gson getGson() {
+        return this.gson;
     }
 
 }

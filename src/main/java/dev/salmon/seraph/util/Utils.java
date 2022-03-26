@@ -12,9 +12,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class Utils {
 
+    static JsonParser jsonParser = new JsonParser();
+
+    /**
+     * Checking if the player is on Hypixel.
+     * @return boolean
+     */
     public static boolean isHypixel() {
         if (Minecraft.getMinecraft().theWorld != null && !Minecraft.getMinecraft().isSingleplayer()) {
             return Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase().contains("hypixel");
@@ -22,14 +29,27 @@ public class Utils {
         return false;
     }
 
-    public static UUID getUUID(String name) {
+    /**
+     * @param uuid Adds dashes to uuids, used here to make them "valid"
+     * @return UUID with a stripped pattern.
+     */
+    public static String addDashes(String uuid) {
+        Pattern STRIPPED_UUID_PATTERN = Pattern.compile("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})");
+        return STRIPPED_UUID_PATTERN.matcher(uuid).replaceAll("$1-$2-$3-$4-$5");
+    }
+
+    /**
+     * @param username Gets minecraft UUID from Username
+     * @return uuid
+     */
+    public static UUID getUUID(String username) {
         UUID uuid = null;
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", name));
+            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", username));
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser parser = new JsonParser();
                 JsonObject object = parser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                uuid = UUID.fromString(object.get("id").getAsString());
+                uuid = UUID.fromString(addDashes(object.get("id").getAsString()));
             } catch (NullPointerException ex) {
                 System.out.println("Could Not Retrieve UUID");
                 ex.printStackTrace();
@@ -42,6 +62,23 @@ public class Utils {
         return uuid;
     }
 
+    /**
+     * @param input Checks for a valid Json by checking if it can be parsed.
+     * @return boolean
+     */
+    public static boolean isValidJson(String input) {
+        try {
+            jsonParser.parse(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param key checks for a valid API key by calling api.hypixel.net/key
+     * @return isValid
+     */
     public static boolean isKeyValid(String key) {
         boolean isValid = false;
         try (CloseableHttpClient client = HttpClients.createDefault()) {
@@ -61,6 +98,5 @@ public class Utils {
 
         return isValid;
     }
-
 
 }
