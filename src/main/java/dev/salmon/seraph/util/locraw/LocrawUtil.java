@@ -7,7 +7,6 @@ import com.google.gson.JsonParser;
 import dev.salmon.seraph.listener.event.LocrawEvent;
 import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.Utils;
-import dev.salmon.seraph.util.chat.ChatReceiveHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -20,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 
-public class LocrawUtil implements ChatReceiveHelper {
+public class LocrawUtil {
 
     private int tick = 0;
     private int limboLoop = 0;
