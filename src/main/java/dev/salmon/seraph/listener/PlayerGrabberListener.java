@@ -17,11 +17,11 @@ public class PlayerGrabberListener {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if (Seraph.Instance.getLocrawUtil().isInGame()) {
+        if (Seraph.Instance.getLocrawUtil().isInDuelsGame()) {
             for (ScorePlayerTeam team : Minecraft.getMinecraft().theWorld.getScoreboard().getTeams()) {
                 for (String playerName : team.getMembershipCollection()) {
                     /* All possible player's have a team prefix with the obfuscated color code */
-                    if (!this.playerList.contains(playerName) && team.getColorPrefix().equals("§7§k")) {
+                    if (!this.playerList.contains(playerName) && team.getColorPrefix().equals("§7§k") || Seraph.Instance.getConfig().isHideName() && !playerName.equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getDisplayNameString()) && !this.playerList.contains(playerName) && team.getColorPrefix().equals("§7§k")) {
                         /* Add to the player list, so we don't try and resolve the player infinitely */
                         this.playerList.add(playerName);
                         Handler.asExecutor(()-> {
