@@ -70,42 +70,40 @@ public class LocrawUtil {
 
         try {
             final String msg = EnumChatFormatting.getTextWithoutFormattingCodes(event.message.getUnformattedText());
-            if (msg.startsWith("{")) {
-                if (!Utils.isValidJson(msg)) {
-                    if (msg.contains("You are sending too many commands! Please try again in a few seconds.")) {
-                        queueUpdate(5000);
-                    }
-                    return;
+            if (!Utils.isValidJson(msg)) {
+                if (msg.contains("You are sending too many commands! Please try again in a few seconds.")) {
+                    queueUpdate(5000);
                 }
-
-                JsonElement raw = parser.parse(msg);
-                if (!raw.isJsonObject()) return;
-                JsonObject json = raw.getAsJsonObject();
-                LocrawInfo parsed = gson.fromJson(json, LocrawInfo.class);
-                if (parsed.getGameType() == LocrawInfo.GameType.LIMBO) {
-                    this.sentCommand = false;
-                    this.limboLoop++;
-                    this.queueUpdate(1000);
-                } else locraw = parsed;
-                this.locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
-
-                if (!parsed.getGameMode().equals("lobby") && parsed.getGameType() == LocrawInfo.GameType.DUELS) {
-                    this.inDuelsGame = true;
-                    MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
-                }
-
-                if (parsed.getGameMode().equals("lobby")) {
-                    this.inGame = false;
-                    MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(this.locraw));
-                } else {
-                    this.inGame = true;
-                    MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
-                }
-
-                event.setCanceled(true);
+                return;
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+
+            JsonElement raw = parser.parse(msg);
+            if (!raw.isJsonObject()) return;
+            JsonObject json = raw.getAsJsonObject();
+            LocrawInfo parsed = gson.fromJson(json, LocrawInfo.class);
+            if (parsed.getGameType() == LocrawInfo.GameType.LIMBO) {
+                this.sentCommand = false;
+                this.limboLoop++;
+                this.queueUpdate(1000);
+            } else locraw = parsed;
+            this.locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
+
+            if (!parsed.getGameMode().equals("lobby") && parsed.getGameType() == LocrawInfo.GameType.DUELS) {
+                this.inDuelsGame = true;
+                MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
+            }
+
+            if (parsed.getGameMode().equals("lobby")) {
+                this.inGame = false;
+                MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(this.locraw));
+            } else {
+                this.inGame = true;
+                MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
+            }
+            event.setCanceled(true);
+
+        } catch(Exception ex) {
+        ex.printStackTrace();
         }
     }
 
