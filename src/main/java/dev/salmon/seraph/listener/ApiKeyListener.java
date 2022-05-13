@@ -15,8 +15,12 @@ public class ApiKeyListener {
         String message = event.message.getUnformattedText();
         if (message.startsWith("Your new API key is ") && Utils.isHypixel()) {
             Seraph.Instance.getConfig().setApiKey(message.replace("Your new API key is ", ""));
-
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GRAY + "Your API key has been found, and added to Seraph's config."));
+            String apikey = message.replace("Your new API key is ", "");
+            if (!Utils.isKeyValid(apikey)) {
+                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "It seems your API key is empty or invalid. Please run " + ChatColor.BOLD + "/api new" + ChatColor.RESET + ChatColor.RED + " once again."));
+            } else {
+                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.GRAY + "Your API key has been found, and added to Seraph's config."));
+            }
         }
     }
 
