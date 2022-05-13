@@ -71,7 +71,7 @@ public class LocrawUtil {
         try {
             final String msg = EnumChatFormatting.getTextWithoutFormattingCodes(event.message.getUnformattedText());
             if (!Utils.isValidJson(msg)) {
-                if (msg.contains("You are sending too many commands! Please try again in a few seconds.")) {
+                if (msg.contains("You are sending too many commands! Please try again in a few seconds.")) { // if you're being rate limited, the /locraw command will be resent in 5 seconds.
                     queueUpdate(5000);
                 }
                 return;
@@ -82,18 +82,23 @@ public class LocrawUtil {
             JsonObject json = raw.getAsJsonObject();
             LocrawInfo parsed = gson.fromJson(json, LocrawInfo.class);
 
+            /*
+             * Limbo Check, Hypixel sometimes sends false limbo calls, this loops every second while in limbo to make sure it's your correct location.
+             */
             if (parsed.getGameType() == LocrawInfo.GameType.LIMBO) {
                 this.sentCommand = false;
                 this.limboLoop++;
                 this.queueUpdate(1000);
-            } else locraw = parsed;
+            } else locraw = parsed; // If you aren't in Locraw, your location is parsed and then used.
             this.locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
 
+            // In game checks for duels queue.
             if (!parsed.getGameMode().equals("lobby") && parsed.getGameType() == LocrawInfo.GameType.DUELS) {
                 this.inDuelsGame = true;
                 MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
             }
 
+            // general in game check for any gamemode.
             if (parsed.getGameMode().equals("lobby")) {
                 this.inGame = false;
                 MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(this.locraw));
