@@ -52,6 +52,7 @@ public class Seraph {
         registerCommands(
                 new SeraphCommand()
         );
+
     }
 
     public SeraphConfig getConfig() {

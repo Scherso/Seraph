@@ -76,11 +76,12 @@ public class LocrawUtil {
                 }
                 return;
             }
-
             JsonElement raw = parser.parse(msg);
+
             if (!raw.isJsonObject()) return;
             JsonObject json = raw.getAsJsonObject();
             LocrawInfo parsed = gson.fromJson(json, LocrawInfo.class);
+
             if (parsed.getGameType() == LocrawInfo.GameType.LIMBO) {
                 this.sentCommand = false;
                 this.limboLoop++;
@@ -113,6 +114,10 @@ public class LocrawUtil {
 
     public boolean isInDuelsGame() {
         return this.inDuelsGame;
+    }
+
+    public  LocrawInfo getLocrawInfo() {
+        return this.locraw;
     }
 
 }

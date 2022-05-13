@@ -63,6 +63,28 @@ public class Utils {
     }
 
     /**
+     * @param username Checks if a player is real or not
+     * @return isValidPlayer
+     */
+    public static boolean isValidPlayer(String username) {
+        boolean isValidPlayer = false;
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(String.format("https://api.mojang.com/users/profiles/minecraft/%s", username));
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser parser = new JsonParser();
+                JsonObject object = parser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                isValidPlayer = object.has("name");
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return isValidPlayer;
+    }
+
+    /**
      * @param input Checks for a valid Json by checking if it can be parsed.
      * @return boolean
      */
