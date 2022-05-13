@@ -26,6 +26,8 @@
   2. **Install the [Forge Loader for 1.8.9][forge189]**
   3. **Install the [latest Seraph version][download]**
   4. **Place the mod in your `minecraft/mods` directory**
+     
+  **See [Build with Gradle][gradlewiki] if you plan to build yourself.**
   
 </details>
 
@@ -55,3 +57,4 @@
 
 [forge189]: https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html
 [download]: https://youtu.be/dQw4w9WgXcQ
+[gradlewiki]: https://github.com/Scherso/Seraph/wiki/Build-with-Gradle
