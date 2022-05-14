@@ -1,5 +1,6 @@
 package dev.salmon.seraph;
 
+import dev.salmon.seraph.command.RequeueCommand;
 import dev.salmon.seraph.command.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
 import dev.salmon.seraph.listener.ApiKeyListener;
@@ -50,7 +51,8 @@ public class Seraph {
         );
 
         registerCommands(
-                new SeraphCommand()
+                new SeraphCommand()/*,
+                new RequeueCommand()*/
         );
 
     }

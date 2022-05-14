@@ -38,10 +38,8 @@ public class SeraphCommand extends CommandBase {
 
         if (args.length > 0) {
             switch (args[0].toLowerCase()) {
-
                 case "setapikey":
                 case "setkey":
-
                     if (args.length < 2)
                         sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Enter an API key"));
                     else
@@ -51,7 +49,6 @@ public class SeraphCommand extends CommandBase {
 
                 case "getapikey":
                 case "getkey":
-
                     if (Seraph.Instance.getConfig().getApiKey().isEmpty()) {
                         sender.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "You must set an API key!"));
                     } else {
@@ -66,7 +63,6 @@ public class SeraphCommand extends CommandBase {
                     break;
 
                 case "info":
-
                     IChatComponent mainComponent = new ChatComponentText(ChatColor.WHITE + "Credits (hover!)");
                     IChatComponent hoverComponent = new ChatComponentText(ChatColor.WHITE + "Credits:\n" + ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso" + ChatColor.GRAY + " Original creator.\n" + ChatColor.AQUA + "[MVP" + ChatColor.GREEN + "+" + ChatColor.AQUA + "] KnightsWhoSayNi_" + ChatColor.GRAY + " Answering " + ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso's" + ChatColor.GRAY + " dumb questions.\n" + ChatColor.GREEN + "[VIP] exejar" + ChatColor.GRAY + " Hypixel API lib (ChampStats), original idea and naming.");
                     HoverEvent hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverComponent);
