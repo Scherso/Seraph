@@ -1,11 +1,12 @@
 package dev.salmon.seraph.command;
 
 import dev.salmon.seraph.Seraph;
+import dev.salmon.seraph.util.chat.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
-import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraft.util.ChatComponentText;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,7 +35,10 @@ public class RequeueCommand extends CommandBase {
     }
 
     public void processCommand(ICommandSender sender, String[] args) {
-        ClientCommandHandler.instance.executeCommand(Minecraft.getMinecraft().thePlayer, "/play " + Seraph.Instance.getLocrawUtil().getLocrawInfo().getGameMode().toLowerCase());
+        if (Seraph.Instance.getLocrawUtil().isInGame())
+            Minecraft.getMinecraft().thePlayer.sendChatMessage("/play " + Seraph.Instance.getLocrawUtil().getLocrawInfo().getGameMode().toLowerCase());
+        else
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "You must be in a game to use this command."));
     }
 
 }
