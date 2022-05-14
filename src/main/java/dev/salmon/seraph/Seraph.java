@@ -51,8 +51,8 @@ public class Seraph {
         );
 
         registerCommands(
-                new SeraphCommand()/*,
-                new RequeueCommand()*/
+                new SeraphCommand(),
+                new RequeueCommand()
         );
 
     }
