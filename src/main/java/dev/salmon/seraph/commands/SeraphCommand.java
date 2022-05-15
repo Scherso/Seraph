@@ -55,7 +55,7 @@ public class SeraphCommand extends Command {
         builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.DARK_RED).append("+").append(ChatColor.AQUA).append("] Scherso").append("\n");
         builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.GREEN).append("+").append(ChatColor.AQUA).append("] KnightsWhoSayNi_ ").append(ChatColor.GRAY).append("(Answering questions)").append("\n");
         builder.append(ChatColor.GREEN).append("[VIP] exejar ").append(ChatColor.GRAY).append("(Hypixel API library)").append("\n");
-        builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.DARK_GREEN).append("+").append(ChatColor.AQUA).append("] Deftu").append("\n");
+        builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.DARK_GREEN).append("+").append(ChatColor.AQUA).append("] Deftu ").append(ChatColor.GRAY).append("(General clean-up)").append("\n");
         builder.append(ChatColor.STRIKETHROUGH).append("------------------").append("\n");
         ChatUtils.show(builder.toString(), false);
     }
