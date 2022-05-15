@@ -1,7 +1,7 @@
 package dev.salmon.seraph;
 
-import dev.salmon.seraph.command.RequeueCommand;
-import dev.salmon.seraph.command.SeraphCommand;
+import dev.salmon.seraph.commands.RequeueCommand;
+import dev.salmon.seraph.commands.SeraphCommand;
 import dev.salmon.seraph.config.SeraphConfig;
 import dev.salmon.seraph.listener.ApiKeyListener;
 import dev.salmon.seraph.listener.LocrawListener;
@@ -43,10 +43,8 @@ public class Seraph {
                 new PlayerGrabberListener()
         );
 
-        registerCommands(
-                new SeraphCommand(),
-                new RequeueCommand()
-        );
+        new SeraphCommand().register();
+        new RequeueCommand().register();
     }
 
     public static void registerListeners(Object... objects) {

@@ -14,15 +14,6 @@ import java.nio.charset.StandardCharsets;
 
 public class ServerUtils {
     /**
-     * @return Whether the player is on Hypixel or not.
-     */
-    public static boolean isOnHypixel() {
-        if (Minecraft.getMinecraft().theWorld != null && !Minecraft.getMinecraft().isSingleplayer())
-            return Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase().contains("hypixel");
-        return false;
-    }
-
-    /**
      * @param key The Hypixel API key that should be checked.
      * @return Whether the API key is valid or not.
      */
