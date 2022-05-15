@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version("1.6.21")
     id("gg.essential.loom") version("0.10.0.3")
-    id("xyz.unifycraft.gradle.tools") version("1.0.0")
-    id("xyz.unifycraft.gradle.snippets.shadow") version("1.0.0")
+    id("xyz.unifycraft.gradle.tools") version("1.0.1")
+    id("xyz.unifycraft.gradle.snippets.shadow") version("1.0.1")
     id("net.kyori.blossom") version("1.3.0")
     java
 }
