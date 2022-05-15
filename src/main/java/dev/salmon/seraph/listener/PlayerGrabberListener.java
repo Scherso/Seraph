@@ -1,8 +1,9 @@
 package dev.salmon.seraph.listener;
 
 import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.util.Handler;
-import dev.salmon.seraph.util.Utils;
+import dev.salmon.seraph.util.Multithreading;
+import dev.salmon.seraph.util.PlayerUtils;
+import dev.salmon.seraph.util.locraw.LocrawUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.ChatComponentText;
@@ -17,27 +18,22 @@ public class PlayerGrabberListener {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if (Seraph.Instance.getLocrawUtil().isInDuelsGame()) {
+        if (LocrawUtils.getInstance().isInDuelsGame()) {
             for (ScorePlayerTeam team : Minecraft.getMinecraft().theWorld.getScoreboard().getTeams()) {
                 for (String playerName : team.getMembershipCollection()) {
                     /* All possible player's have a team prefix with the obfuscated color code */
-                    if (!this.playerList.contains(playerName) && team.getColorPrefix().equals("§7§k") || Seraph.Instance.getConfig().isHideName() && !playerName.equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getDisplayNameString()) && !this.playerList.contains(playerName) && team.getColorPrefix().equals("§7§k")) {
+                    if (!playerList.contains(playerName) && team.getColorPrefix().equals("§7§k") || Seraph.getInstance().getConfig().isHideName() && !playerName.equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getDisplayNameString()) && !playerList.contains(playerName) && team.getColorPrefix().equals("§7§k")) {
                         /* Add to the player list, so we don't try and resolve the player infinitely */
                         this.playerList.add(playerName);
-                        Handler.asExecutor(()-> {
-                            try {
-                                /* If you can't resolve a UUID from the player name, they aren't a real player */
-                                Utils.getUUID(playerName);
-                                String uuid = Utils.getUUID(playerName).toString();
-                                /* If it's a real player, just print their name for testing */
-                                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("name: " + playerName + "\nuuid: " + uuid));
-                            } catch (Exception ignored) {
-                            }
+                        Multithreading.runAsync(()-> {
+                            if (!PlayerUtils.isValidPlayer(playerName)) return; // This is not a real player.
+                            String uuid = PlayerUtils.getUuid(playerName).toString();
+                            // If it's a real player, just print their name for testing.
+                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("name: " + playerName + "\nuuid: " + uuid));
                         });
                     }
                 }
             }
         }
     }
-
 }

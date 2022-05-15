@@ -14,18 +14,16 @@ import java.util.Map;
 
 @Mixin(FMLHandshakeMessage.ModList.class)
 public class ModListMixin extends FMLHandshakeMessage {
-    @Shadow(remap = false)
-    private Map<String, String> modTags;
+    @Shadow(remap = false) private Map<String, String> modTags;
 
     /**
-     * Removes mod id from the map that forge sends to the server.
+     * Removes mod ID from the map that forge sends to the server.
      *
      * @author __fastcall
      * @see net.minecraftforge.fml.common.network.handshake.FMLHandshakeMessage
      */
     @Inject(method = "<init>(Ljava/util/List;)V", at = @At("RETURN"), remap = false)
     private void removeMod(List<ModContainer> modList, CallbackInfo ci) {
-        this.modTags.keySet().removeIf(key -> key.equals(Seraph.ID));
+        modTags.keySet().removeIf(key -> key.equalsIgnoreCase(Seraph.ID));
     }
-
 }

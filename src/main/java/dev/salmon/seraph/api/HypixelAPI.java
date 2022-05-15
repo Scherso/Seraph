@@ -17,8 +17,6 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
 public class HypixelAPI {
-
-    private static final String key = Seraph.Instance.getConfig().getApiKey();
     public JsonObject achievementObj;
     public JsonObject playerObject;
 
@@ -39,7 +37,7 @@ public class HypixelAPI {
     }
 
     public static String getDuelsWins(String uuid) {
-        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid.replace("-", ""));
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(requestURL);
 
@@ -67,13 +65,13 @@ public class HypixelAPI {
      */
     public JsonObject getWholeObject(String uuid) throws InvalidKeyException, PlayerNullException, ApiRequestException, BadJsonException {
         JsonObject obj = new JsonObject();
-        if (key == null) {
+        if (Seraph.getInstance().getConfig().getApiKey() == null) {
             throw new InvalidKeyException();
         } else {
             // String.format is basically constructing a String. %s is a placeholder which is defined by the strings placed after the initial String.
             // so String.format("%s", "hello"); is the same as "hello"
             // String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid); is basically placing the key in the first placeholder, and uuid in the second
-            String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid.replace("-", ""));
+            String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
             try (CloseableHttpClient client = HttpClients.createDefault()) {
                 HttpGet request = new HttpGet(requestURL);
                 JsonParser parser = new JsonParser();

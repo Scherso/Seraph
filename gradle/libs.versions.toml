@@ -1,6 +1,6 @@
 [versions]
 vigilance = "220"
-mixin = "0.8.5-SNAPSHOT"
+mixin = "0.7.11-SNAPSHOT"
 
 [libraries]
 vigilance = { module = "gg.essential:vigilance-1.8.9-forge", version.ref = "vigilance" }

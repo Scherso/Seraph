@@ -1,9 +1,8 @@
-package dev.salmon.seraph.util.chat;
+package dev.salmon.seraph.util;
 
 import java.util.regex.Pattern;
 
 public enum ChatColor {
-
     BLACK('0', -16777216),
     DARK_BLUE('1', -16777046),
     DARK_GREEN('2', -16733696),
