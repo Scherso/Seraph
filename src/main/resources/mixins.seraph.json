@@ -1,12 +1,10 @@
 {
-  "compatibilityLevel": "JAVA_8",
-  "minVersion": "0.7",
-  "package": "dev.salmon.seraph.mixin",
-  "refmap": "mixins.seraph.refmap.json",
-  "mixins": [
-    "ModListMixin"
-  ],
-  "verbose": true,
-  "client": [
-  ]
+    "compatibilityLevel": "JAVA_8",
+    "minVersion": "0.7",
+    "package": "dev.salmon.seraph.mixin",
+    "refmap": "mixins.seraph.refmap.json",
+    "verbose": true,
+    "mixins": [
+        "ModListMixin"
+    ]
 }

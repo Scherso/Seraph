@@ -1,0 +1,3 @@
+[*.{json,info}]
+indent_size = 4
+indent_char = space
