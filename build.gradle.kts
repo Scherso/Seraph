@@ -1,3 +1,7 @@
+import xyz.unifycraft.gradle.utils.disableRunConfigs
+import xyz.unifycraft.gradle.utils.GameSide
+import xyz.unifycraft.gradle.utils.useMinecraftTweaker
+
 plugins {
     kotlin("jvm") version("1.6.21")
     id("gg.essential.loom") version("0.10.0.3")
@@ -16,8 +20,9 @@ val mcVersion: String = property("minecraft.version")?.toString() ?: throw Illeg
 version = projectVersion
 group = projectGroup
 
+useMinecraftTweaker("gg.essential.loader.stage0.EssentialSetupTweaker")
 loom {
-    launchConfigs["client"].arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
+    disableRunConfigs(GameSide.SERVER)
     forge {
         mixinConfig("mixins.${projectId}.json")
         mixin.defaultRefmapName.set("mixins.${projectId}.refmap.json")
@@ -37,7 +42,10 @@ repositories {
 }
 
 dependencies {
-    unishade(libs.vigilance)
+    // Essential
+    unishade("gg.essential:loader-launchwrapper:1.1.3")
+    compileOnly(libs.essential)
+
     unishade(libs.mixin)
 }
 
@@ -71,7 +79,6 @@ tasks {
         manifest.attributes(
             "ModSide" to "CLIENT",
             "ForceloadAsMod" to true,
-            "TweakClass" to "org.spongepowered.asm.launch.MixinTweaker",
             "MixinConfigs" to "mixins.${projectId}.json",
             "TweakOrder" to "0"
         )
