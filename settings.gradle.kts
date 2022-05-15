@@ -13,8 +13,6 @@ pluginManagement {
         maven("https://maven.minecraftforge.net/")
         // Jitpack
         maven("https://jitpack.io/")
-
-        mavenLocal()
     }
 }
 
