@@ -3,16 +3,12 @@ package dev.salmon.seraph.util.locraw;
 import com.google.gson.annotations.SerializedName;
 
 public class LocrawInfo {
-
     @SerializedName("server")
     private String serverId;
-
     @SerializedName("mode")
     private String gameMode = "lobby";
-
     @SerializedName("map")
     private String mapName;
-
     @SerializedName("gametype")
     private String rawGameType;
     private GameType gameType;
@@ -83,7 +79,6 @@ public class LocrawInfo {
         SMASH_HEROES("SUPER_SMASH"),
         WARLORDS("BATTLEGROUND");
 
-        private static final GameType[] typeArray = values();
         private final String serverName;
 
         GameType(String serverName) {
@@ -91,7 +86,7 @@ public class LocrawInfo {
         }
 
         public static GameType getFromLocraw(String gameType) {
-            for (GameType value : typeArray) {
+            for (GameType value : values()) {
                 if (value.serverName.equals(gameType)) {
                     return value;
                 }
@@ -103,7 +98,5 @@ public class LocrawInfo {
         public String getServerName() {
             return serverName;
         }
-
     }
-
 }

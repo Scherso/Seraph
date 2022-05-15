@@ -1,14 +1,10 @@
 package dev.salmon.seraph.api.exception;
 
-import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.util.chat.ChatColor;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
+import dev.salmon.seraph.util.ChatColor;
+import dev.salmon.seraph.util.ChatUtils;
 
 public class BadJsonException extends Exception {
-
     public BadJsonException() {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Hypixel API returned an bad json, Hypixel API may be down. If it is not, please contact a developer about this."));
+        ChatUtils.showChatMessage(ChatColor.RED + "Hypixel API returned an bad json, Hypixel API may be down. If it is not, please contact a developer about this.");
     }
-
 }

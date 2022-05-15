@@ -9,43 +9,63 @@ import gg.essential.vigilance.data.PropertyType;
 import java.io.File;
 
 public class SeraphConfig extends Vigilant {
-
-    // setting the file and name of the file. Seraph.NAME will appear at the top of the config screen.
-    public SeraphConfig() {
-        super(new File("./config/Seraph", Seraph.ID + ".toml"), ChatColor.GOLD + Seraph.NAME);
-        initialize();
-    }
-
     @Property(
             type = PropertyType.TEXT,
             name = "API Key",
-            description = "Hypixel API key used to fetch stats.",
+            description = "Hypixel API key used to make requests to the Hypixel API.",
             category = "General",
             placeholder = "/api new, or /seraph apikey <apikey>",
             protectedText = true
-    )
-    private String apiKey = ""; // cannot initialize a variable with itself ( getApiKey() )
+    ) private String apiKey = "";
 
     @Property(
             type = PropertyType.SWITCH,
             name = "Hide Own Name",
             description = "Hide your name and stats from showing.",
             category = "General"
-    )
-    private boolean hideName = false;
+    ) private boolean hideName = false;
 
-    // the api key that will be used.
+    public SeraphConfig(File configFile) {
+        super(configFile, ChatColor.GOLD + Seraph.NAME);
+        initialize();
+    }
+
+    private void saveConfig() {
+        markDirty();
+        writeData();
+    }
+
+    /**
+     * @return The API key that will be used.
+     */
     public String getApiKey() {
-        return this.apiKey;
+        return apiKey;
     }
 
-    // set api key method, used in the api key sub command, and api key listener.
-    public void setApiKey(String apiKey) {
+    /**
+     * Sets the API key used for Hypixel API requests.
+     *
+     * @param apiKey The new value to set the config option to.
+     * @param save Whether this should be saved to the config file or not.
+     */
+    public void setApiKey(String apiKey, boolean save) {
         this.apiKey = apiKey;
+        if (save) saveConfig();
     }
 
+    /**
+     * Sets the API key used for Hypixel API requests.
+     *
+     * @param apiKey The new value to set the config option to.
+     */
+    public void setApiKey(String apiKey) {
+        setApiKey(apiKey, true);
+    }
+
+    /**
+     * @return Whether the user's own name should be hidden from stats or not.
+     */
     public boolean isHideName() {
-        return this.hideName;
+        return hideName;
     }
-
 }

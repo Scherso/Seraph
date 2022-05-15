@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "1.6.21"
     id("gg.essential.loom") version("0.10.0.3")
     id("xyz.unifycraft.gradle.tools") version("1.0.0")
+    id("xyz.unifycraft.gradle.snippets.shadow") version("1.0.0")
     id("net.kyori.blossom") version("1.3.0")
     java
 }
@@ -16,7 +17,7 @@ version = projectVersion
 group = projectGroup
 
 loom {
-    launchConfigs["client"].arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
+    launchConfigs["client"].arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
     forge {
         mixinConfig("mixins.${projectId}.json")
         mixin.defaultRefmapName.set("mixins.${projectId}.refmap.json")
@@ -36,10 +37,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly(libs.vigilance)
-
-    compileOnly(libs.mixin)
-    annotationProcessor(libs.mixin)
+    unishade(libs.vigilance)
+    unishade(libs.mixin)
 }
 
 tasks {
@@ -72,7 +71,7 @@ tasks {
         manifest.attributes(
             "ModSide" to "CLIENT",
             "ForceloadAsMod" to true,
-            "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
+            "TweakClass" to "org.spongepowered.asm.launch.MixinTweaker",
             "MixinConfigs" to "mixins.${projectId}.json",
             "TweakOrder" to "0"
         )

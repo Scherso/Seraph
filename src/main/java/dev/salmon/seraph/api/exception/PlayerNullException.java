@@ -1,14 +1,10 @@
 package dev.salmon.seraph.api.exception;
 
-import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.util.chat.ChatColor;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
+import dev.salmon.seraph.util.ChatColor;
+import dev.salmon.seraph.util.ChatUtils;
 
 public class PlayerNullException extends Exception {
-
     public PlayerNullException() {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Seraph.SeraphPrefix + ChatColor.RED + "Null player exception, try re-queue."));
+        ChatUtils.showChatMessage(ChatColor.RED + "Null player exception, try re-queue.");
     }
-
 }
