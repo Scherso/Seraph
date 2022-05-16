@@ -86,7 +86,7 @@ public class LocrawUtils {
                 limboLoop++;
                 queueUpdate(1000);
             } // if the player isn't in limbo, the parsed info is used.
-            else if (parsed != null) {
+            else (parsed != null) {
                 if(locraw != null && parsed.getGameMode().equals("lobby") && !locraw.getGameMode().equals("lobby"))
                     lastGameLocraw = locraw
                 locraw = parsed
