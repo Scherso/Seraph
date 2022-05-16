@@ -19,7 +19,7 @@ public class RequeueCommand extends Command {
         if (LocrawUtils.getInstance().isInGame())
             Minecraft.getMinecraft().thePlayer.sendChatMessage("/play " + LocrawUtils.getInstance().getLocrawInfo().getGameMode().toLowerCase());
         else if (LocrawUtils.getInstance().getLastGameLocrawInfo() != null)
-            Minecraft.getMinecraft().thePlayer.sendChatMessage("/play " + LocrawUtils.getInstance().getLastGameLocrawInfo().toLowerCase());
+            Minecraft.getMinecraft().thePlayer.sendChatMessage("/play " + LocrawUtils.getInstance().getLastGameLocrawInfo().getGameMode().toLowerCase());
         else ChatUtils.error("You must be in a game to use this command.");
     }
 
