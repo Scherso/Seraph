@@ -87,9 +87,9 @@ public class LocrawUtils {
                 queueUpdate(1000);
             } // if the player isn't in limbo, the parsed info is used.
             else if (parsed != null) {
-                if(locraw != null && parsed.getGameMode().equals("lobby") && !locraw.getGameMode().equals("lobby"))
-                    lastGameLocraw = locraw
-                locraw = parsed
+                if (locraw != null && parsed.getGameMode().equals("lobby") && !locraw.getGameMode().equals("lobby")) 
+                    lastGameLocraw = locraw;
+                locraw = parsed;
                 locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
 
                 // In game checks for duels queue.
