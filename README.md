@@ -17,43 +17,25 @@
 
 ---
 
-<details>
-  <summary>
-       Installation</summary>
+## Installation Guide
+1. **Install Minecraft 1.8.9**
+2. **Install the [Forge Loader for 1.8.9][forge189]**
+3. **Install the [latest Seraph version][download]**
+4. **Place the mod in your `minecraft/mods` directory**
      
-  ## Installation Guide
-  1. **Install Minecraft 1.8.9**
-  2. **Install the [Forge Loader for 1.8.9][forge189]**
-  3. **Install the [latest Seraph version][download]**
-  4. **Place the mod in your `minecraft/mods` directory**
-     
-  **See [Build with Gradle][gradlewiki] if you plan to build yourself.**
+**See [Build with Gradle][gradlewiki] if you plan to build yourself.**
   
-</details>
-
-<details>
-  <summary>
-       Commands</summary>
+## Commands
+- `/seraph` Opens the configuration screen.
+- `/seraph info` Sends a chat message with information regarding Seraph.
+- `/seraph setapikey` Allows you to set your Hypixel API key without running `/api new`
+- `/seraph getapikey` Sends a chat message with your api key, upon clicking you can copy it.
+- Sending a message with an invalid subcommand will send command usages.
   
-  ## Commands
-  - `/seraph` Opens the configuration screen.
-  - `/seraph info` Sends a chat message with information regarding Seraph.
-  - `/seraph setapikey` Allows you to set your Hypixel API key without running `/api new`
-  - `/seraph getapikey` Sends a chat message with your api key, upon clicking you can copy it.
-  - Sending a message with an invalid subcommand will send command usages.
-  
-</details>
-
-<details>
-  <summary>
-    Features</summary>
-  
-  ## Features
-  - Queue stats post duels update.
-  - Autododge soon ™
-  - literally everything else soon ™
-  
-</details>
+## Features
+- Queue stats post duels update.
+- Autododge soon ™
+- literally everything else soon ™
 
 [forge189]: https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html
 [download]: https://youtu.be/dQw4w9WgXcQ
