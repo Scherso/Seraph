@@ -17,6 +17,8 @@
 
 ---
 
+<br />
+
 ## Installation Guide
 1. **Install Minecraft 1.8.9**
 2. **Install the [Forge Loader for 1.8.9][forge189]**
