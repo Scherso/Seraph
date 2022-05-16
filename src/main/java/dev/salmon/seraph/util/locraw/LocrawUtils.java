@@ -32,7 +32,6 @@ public class LocrawUtils {
     private boolean inGame;
 
     private LocrawInfo locraw;
-    private LocrawInfo lastGameLocraw;
 
     public void queueUpdate(long interval) {
         sendPermitted = true;
@@ -85,11 +84,8 @@ public class LocrawUtils {
                 sentCommand = false;
                 limboLoop++;
                 queueUpdate(1000);
-            } // if the player isn't in limbo, the parsed info is used.
-            else (parsed != null) {
-                if(locraw != null && parsed.getGameMode().equals("lobby") && !locraw.getGameMode().equals("lobby"))
-                    lastGameLocraw = locraw
-                locraw = parsed
+            } else locraw = parsed; // if the player isn't in limbo, the parsed info is used.
+            if (locraw != null) {
                 locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
 
                 // In game checks for duels queue.
@@ -106,8 +102,9 @@ public class LocrawUtils {
                     inGame = true;
                     MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(locraw));
                 }
+
+                event.setCanceled(true);
             }
-            event.setCanceled(true);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -123,10 +120,6 @@ public class LocrawUtils {
 
     public LocrawInfo getLocrawInfo() {
         return locraw;
-    }
-
-    public LocrawInfo getLastGameLocrawInfo() {
-        return lastGameLocraw;
     }
 
     public static LocrawUtils getInstance() {
