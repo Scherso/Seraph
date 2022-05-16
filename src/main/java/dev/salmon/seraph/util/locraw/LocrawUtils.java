@@ -6,6 +6,7 @@ import dev.salmon.seraph.listener.event.LocrawEvent;
 import dev.salmon.seraph.util.JsonUtils;
 import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.ServerUtils;
+import gg.essential.api.EssentialAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -47,7 +48,7 @@ public class LocrawUtils {
 
         if (tick % 20 == 0) {
             tick = 0;
-            if (ServerUtils.isOnHypixel() && !sentCommand) {
+            if (EssentialAPI.getMinecraftUtil().isHypixel() && !sentCommand) {
                 queueUpdate(500);
                 sentCommand = true;
             }
