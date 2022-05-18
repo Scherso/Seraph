@@ -7,6 +7,8 @@ assignees: Scherso
 
 ---
 
+<br />
+
 <details>
    <summary>
         Bug/Crash Description</summary>   
