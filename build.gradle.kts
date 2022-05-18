@@ -58,7 +58,7 @@ dependencies {
     mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
     forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
 
-    embed("gg.essential:loader-launchwrapper:${launchwrapperVersion}")
+    embed("gg.essential:loader-launchwrapper:1.1.3")
     implementation(libs.essential)
 
     compileOnly(libs.mixin)
