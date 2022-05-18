@@ -8,7 +8,7 @@
      src="https://github.com/Scherso/Seraph/blob/master/src/main/resources/seraph.png" 
 />
 
-### Seraph Mod, Duels Utilities for 1.8.9
+### Seraph Mod, Duels Utilities for 1.8.9 (Work In Progress)
 
 <img
      align="left" alt="Worlflow Badge"
