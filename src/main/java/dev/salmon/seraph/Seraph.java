@@ -51,10 +51,6 @@ public class Seraph {
         Arrays.stream(objects).forEachOrdered(MinecraftForge.EVENT_BUS::register);
     }
 
-    public static void registerCommands(ICommand... commands) {
-        Arrays.stream(commands).forEachOrdered(ClientCommandHandler.instance::registerCommand);
-    }
-
     public SeraphConfig getConfig() {
         return config;
     }

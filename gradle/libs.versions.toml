@@ -1,7 +1,9 @@
 [versions]
 essential = "2487"
 mixin = "0.8.5-SNAPSHOT"
+# mixinprocessor = ":0.8.5:processor"
 
 [libraries]
 essential = { module = "gg.essential:essential-1.8.9-forge", version.ref = "essential" }
 mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
+# mixinprocessor = { module = "org.spongepowered:mixin", version.ref = "mixinprocessor" }
