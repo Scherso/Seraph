@@ -61,7 +61,7 @@ public class PlayerUtils {
                 JsonObject object = parser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
                 isValidPlayer = object.has("name");
             } catch (NullPointerException ex) {
-                ex.printStackTrace();
+                System.out.println("Null or invalid player provided by the server.");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
