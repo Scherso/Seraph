@@ -46,7 +46,9 @@ public class Seraph {
     }
 
     public static void registerListeners(Object... objects) {
-        Arrays.stream(objects).forEachOrdered(MinecraftForge.EVENT_BUS::register);
+        for (Object o : objects) {
+            MinecraftForge.EVENT_BUS.register(o);
+        }
     }
 
     public SeraphConfig getConfig() {
