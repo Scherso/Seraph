@@ -7,10 +7,6 @@ assignees: Scherso
 
 ---
 
-- Upload all logs to [hastebin][hst]
-- Upload images to any image host of your choice.
-- Upload all videos to [streamable](streamable.com)
-
 <details>
    <summary>
         Bug/Crash Description</summary>   
@@ -18,8 +14,9 @@ assignees: Scherso
   ## Describe your issue:
   - Crash or Bug: 
   
-  #### Bug/Crash description:
+  - Bug/Crash description:
 
+   
 </details>
   
 
@@ -28,14 +25,27 @@ assignees: Scherso
         Steps to Reproduce</summary>   
      
   ## Steps to reproduce this issue:
-  1. Forge Version (ex `11.15.1.2318. 5`): 
+  1. Forge Version (ex `11.15.1.2318`): 
   2. Java Version:
   3. latest.log, upload via [hastebin][hst]
   4. A list of mods in your mods folder, either screenshot or list:
      
 </details>
 
-#### Any Additional Context 
-Add any additional context, videos, photos, etc. 
+<details>
+   <summary>
+      Additional Context</summary>
+   
+   ## Attach any Additional Context Below:
+   <!---Videos, Photos, More Logs, Code, etc.--->
 
+</details>
+
+<br />
+
+### Make sure you have:
+- Uploaded all logs to [hastebin][hst]
+- Uploaded all images to any image host.
+- Uploaded all videos to [streamable](streamable.com)
+ 
 [hst]: https://www.toptal.com/developers/hastebin/
