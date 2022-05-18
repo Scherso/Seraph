@@ -22,7 +22,7 @@ public class PlayerGrabberListener {
             for (ScorePlayerTeam team : Minecraft.getMinecraft().theWorld.getScoreboard().getTeams()) {
                 for (String playerName : team.getMembershipCollection()) {
                     /* All possible player's have a team prefix with the obfuscated color code */
-                    if (!playerList.contains(playerName) && team.getColorPrefix().equals("§7§k") || Seraph.getInstance().getConfig().isHideName() && !playerName.equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getDisplayNameString()) && !playerList.contains(playerName) && team.getColorPrefix().equals("§7§k")) {
+                    if (!playerList.contains(playerName) && team.getColorPrefix().equals("§7§k") && !playerName.equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getDisplayNameString())) {
                         /* Add to the player list, so we don't try and resolve the player infinitely */
                         this.playerList.add(playerName);
                         Multithreading.runAsync(()-> {

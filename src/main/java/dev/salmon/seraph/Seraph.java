@@ -7,8 +7,6 @@ import dev.salmon.seraph.listener.ApiKeyListener;
 import dev.salmon.seraph.listener.LocrawListener;
 import dev.salmon.seraph.listener.PlayerGrabberListener;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
-import net.minecraft.command.ICommand;
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
