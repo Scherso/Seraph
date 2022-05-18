@@ -11,6 +11,7 @@ import gg.essential.api.commands.DisplayName;
 import gg.essential.api.commands.SubCommand;
 import gg.essential.universal.ChatColor;
 import net.minecraft.event.ClickEvent;
+import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 
@@ -30,9 +31,9 @@ public class SeraphCommand extends Command {
     public void handleSetKey(@DisplayName("key") String key) {
         if (ServerUtils.isApiKeyValid(key)) {
             Seraph.getInstance().getConfig().setApiKey(key);
-            ChatUtils.success("Your API key has been found, and added to Seraph's config.");
+            ChatUtils.success(key + "has been added to Seraph's config file.");
         } else {
-            ChatUtils.error(ChatColor.RED + "It seems your API key is empty or invalid. Please run " + ChatColor.BOLD + "/api new" + ChatColor.RESET + ChatColor.RED + " once again.");
+            ChatUtils.error(ChatColor.RED + "It seems your API key is invalid. Please run " + ChatColor.BOLD + "/api new" + ChatColor.RESET + ChatColor.RED + " once again.");
         }
     }
 
@@ -41,7 +42,7 @@ public class SeraphCommand extends Command {
         if (Seraph.getInstance().getConfig().getApiKey().isEmpty()) {
             ChatUtils.error("Your API key isn't set!");
         } else {
-            IChatComponent text = new ChatComponentText("Click to add your API key to your chat box.");
+            IChatComponent text = new ChatComponentText(ChatColor.YELLOW + "Hover over to and click to add your API key to your chat box.");
             text.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, Seraph.getInstance().getConfig().getApiKey()));
             ChatUtils.success(text);
         }
@@ -57,7 +58,7 @@ public class SeraphCommand extends Command {
         builder.append(ChatColor.GREEN).append("[VIP] exejar ").append(ChatColor.GRAY).append("(Hypixel API library)").append("\n");
         builder.append(ChatColor.GREEN).append("[VIP] You_ded ").append(ChatColor.GRAY).append("(Being Cool)").append("\n");
         builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.DARK_GREEN).append("+").append(ChatColor.AQUA).append("] Deftu ").append(ChatColor.GRAY).append("(General clean-up)").append("\n");
-        builder.append(ChatColor.STRIKETHROUGH).append("------------------").append("\n");
+        builder.append(ChatColor.STRIKETHROUGH).append("------------------");
         ChatUtils.show(builder.toString(), false);
     }
 

@@ -1,12 +1,9 @@
-import xyz.unifycraft.gradle.utils.disableRunConfigs
-import xyz.unifycraft.gradle.utils.GameSide
-import xyz.unifycraft.gradle.utils.useMinecraftTweaker
+import dev.architectury.pack200.java.Pack200Adapter
 
 plugins {
     kotlin("jvm") version("1.6.21")
-    id("gg.essential.loom") version("0.10.0.3")
-    id("xyz.unifycraft.gradle.tools") version("1.0.1")
-    id("xyz.unifycraft.gradle.snippets.shadow") version("1.0.1")
+    id("dev.architectury.architectury-pack200") version("0.1.3")
+    id("gg.essential.loom") version("0.10.0.+")
     id("net.kyori.blossom") version("1.3.0")
     java
 }
@@ -20,10 +17,22 @@ val mcVersion: String = property("minecraft.version")?.toString() ?: throw Illeg
 version = projectVersion
 group = projectGroup
 
-useMinecraftTweaker("gg.essential.loader.stage0.EssentialSetupTweaker")
 loom {
-    disableRunConfigs(GameSide.SERVER)
+    launchConfigs {
+        getByName("client") {
+            arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
+            arg("--mixin", "mixins.${projectId}.json")
+        }
+    }
+
+    runConfigs {
+        getByName("client") {
+            isIdeConfigGenerated = true
+        }
+    }
+
     forge {
+        pack200Provider.set(Pack200Adapter())
         mixinConfig("mixins.${projectId}.json")
         mixin.defaultRefmapName.set("mixins.${projectId}.refmap.json")
     }
@@ -41,12 +50,18 @@ repositories {
     maven("https://repo.spongepowered.org/repository/maven-public/")
 }
 
-dependencies {
-    // Essential
-    unishade("gg.essential:loader-launchwrapper:1.1.3")
-    compileOnly(libs.essential)
+val embed by configurations.creating
+configurations.implementation.get().extendsFrom(embed)
 
-    unishade(libs.mixin)
+dependencies {
+    minecraft("com.mojang:minecraft:1.8.9")
+    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
+    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+
+    embed("gg.essential:loader-launchwrapper:1.1.3")
+    implementation(libs.essential)
+
+    compileOnly(libs.mixin)
 }
 
 tasks {
@@ -79,8 +94,16 @@ tasks {
         manifest.attributes(
             "ModSide" to "CLIENT",
             "ForceloadAsMod" to true,
+            "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
             "MixinConfigs" to "mixins.${projectId}.json",
             "TweakOrder" to "0"
         )
+    }
+}
+
+kotlin {
+    jvmToolchain {
+        check(this is JavaToolchainSpec)
+        languageVersion.set(JavaLanguageVersion.of(8))
     }
 }
