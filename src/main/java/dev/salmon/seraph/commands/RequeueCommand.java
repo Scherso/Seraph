@@ -1,7 +1,6 @@
 package dev.salmon.seraph.commands;
 
 import com.google.common.collect.Sets;
-import dev.salmon.seraph.util.ChatUtils;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
 import gg.essential.api.commands.Command;
 import gg.essential.api.commands.DefaultHandler;
