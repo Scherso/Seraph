@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import dev.salmon.seraph.listener.event.LocrawEvent;
 import dev.salmon.seraph.util.JsonUtils;
 import dev.salmon.seraph.util.Multithreading;
-import dev.salmon.seraph.util.ServerUtils;
 import gg.essential.api.EssentialAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
@@ -32,6 +31,7 @@ public class LocrawUtils {
     private boolean inGame;
 
     private LocrawInfo locraw;
+    private LocrawInfo lastLocraw;
 
     public void queueUpdate(long interval) {
         sendPermitted = true;
@@ -99,6 +99,7 @@ public class LocrawUtils {
                     inGame = false;
                     MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(locraw));
                 } else {
+                    lastLocraw = parsed;
                     inGame = true;
                     MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(locraw));
                 }
@@ -111,15 +112,19 @@ public class LocrawUtils {
     }
 
     public boolean isInGame() {
-        return inGame;
+        return this.inGame;
     }
 
     public boolean isInDuelsGame() {
-        return inDuelsGame;
+        return this.inDuelsGame;
     }
 
     public LocrawInfo getLocrawInfo() {
-        return locraw;
+        return this.locraw;
+    }
+
+    public LocrawInfo  getLastLocrawInfo() {
+        return this.lastLocraw;
     }
 
     public static LocrawUtils getInstance() {

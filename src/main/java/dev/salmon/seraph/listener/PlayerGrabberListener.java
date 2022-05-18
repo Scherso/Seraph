@@ -4,6 +4,7 @@ import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.util.ChatUtils;
 import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.PlayerUtils;
+import dev.salmon.seraph.util.locraw.LocrawInfo;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScorePlayerTeam;
@@ -27,10 +28,7 @@ public class PlayerGrabberListener {
                         /* Add to the player list, so we don't try and resolve the player infinitely */
                         this.playerList.add(playerName);
                         Multithreading.runAsync(()-> {
-                            if (!PlayerUtils.isValidPlayer(playerName)) {
-                                ChatUtils.error( playerName + "is Nicked!"); // will return as a nicked player.
-                                return; // This is not a real player.
-                            }
+                            if (!PlayerUtils.isValidPlayer(playerName)) return; // This is not a real player.
                             String uuid = PlayerUtils.getUuid(playerName).toString();
                             // If it's a real player, just print their name for testing.
                             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("name: " + playerName + "\nuuid: " + uuid));
