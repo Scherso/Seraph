@@ -18,13 +18,6 @@ public class SeraphConfig extends Vigilant {
             protectedText = true
     ) private String apiKey = "";
 
-    @Property(
-            type = PropertyType.SWITCH,
-            name = "Hide Own Name",
-            description = "Hide your name and stats from showing.",
-            category = "General"
-    ) private boolean hideName = false;
-
     public SeraphConfig(File configFile) {
         super(configFile, ChatColor.GOLD + Seraph.NAME);
         initialize();
@@ -62,10 +55,4 @@ public class SeraphConfig extends Vigilant {
         setApiKey(apiKey, true);
     }
 
-    /**
-     * @return Whether the user's own name should be hidden from stats or not.
-     */
-    public boolean isHideName() {
-        return hideName;
-    }
 }
