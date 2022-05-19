@@ -11,7 +11,6 @@ import gg.essential.api.commands.DisplayName;
 import gg.essential.api.commands.SubCommand;
 import gg.essential.universal.ChatColor;
 import net.minecraft.event.ClickEvent;
-import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 

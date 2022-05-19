@@ -2,7 +2,6 @@ pluginManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
-
         // Architectury
         maven("https://maven.architectury.dev/")
         // Fabric

@@ -14,7 +14,8 @@ import java.util.Map;
 
 @Mixin(FMLHandshakeMessage.ModList.class)
 public class ModListMixin extends FMLHandshakeMessage {
-    @Shadow(remap = false) private Map<String, String> modTags;
+    @Shadow(remap = false)
+    private Map<String, String> modTags;
 
     /**
      * Removes mod ID from the map that forge sends to the server.
