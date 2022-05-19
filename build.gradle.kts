@@ -1,10 +1,10 @@
 import dev.architectury.pack200.java.Pack200Adapter
 
 plugins {
-    kotlin("jvm") version("1.6.21")
-    id("dev.architectury.architectury-pack200") version("0.1.3")
-    id("gg.essential.loom") version("0.10.0.+")
-    id("net.kyori.blossom") version("1.3.0")
+    kotlin("jvm") version ("1.6.21")
+    id("dev.architectury.architectury-pack200") version ("0.1.3")
+    id("gg.essential.loom") version ("0.10.0.+")
+    id("net.kyori.blossom") version ("1.3.0")
     java
 }
 
@@ -12,7 +12,8 @@ val projectName: String by project
 val projectId: String by project
 val projectVersion: String by project
 val projectGroup: String by project
-val mcVersion: String = property("minecraft.version")?.toString() ?: throw IllegalStateException("minecraft.version is not set...")
+val mcVersion: String =
+    property("minecraft.version")?.toString() ?: throw IllegalStateException("minecraft.version is not set...")
 
 version = projectVersion
 group = projectGroup

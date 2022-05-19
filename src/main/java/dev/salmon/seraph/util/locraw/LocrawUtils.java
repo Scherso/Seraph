@@ -33,6 +33,12 @@ public class LocrawUtils {
     private LocrawInfo locraw;
     private LocrawInfo lastLocraw;
 
+    public static LocrawUtils getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new LocrawUtils();
+        return INSTANCE;
+    }
+
     public void queueUpdate(long interval) {
         sendPermitted = true;
         Multithreading.schedule(() -> {
@@ -123,13 +129,7 @@ public class LocrawUtils {
         return this.locraw;
     }
 
-    public LocrawInfo  getLastLocrawInfo() {
+    public LocrawInfo getLastLocrawInfo() {
         return this.lastLocraw;
-    }
-
-    public static LocrawUtils getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new LocrawUtils();
-        return INSTANCE;
     }
 }

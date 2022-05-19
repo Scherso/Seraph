@@ -1,10 +1,7 @@
 package dev.salmon.seraph.listener;
 
-import dev.salmon.seraph.Seraph;
-import dev.salmon.seraph.util.ChatUtils;
 import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.PlayerUtils;
-import dev.salmon.seraph.util.locraw.LocrawInfo;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScorePlayerTeam;
@@ -27,7 +24,7 @@ public class PlayerGrabberListener {
                     if (!playerList.contains(playerName) && team.getColorPrefix().equals("§7§k") && !playerName.equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getDisplayNameString())) {
                         /* Add to the player list, so we don't try and resolve the player infinitely */
                         this.playerList.add(playerName);
-                        Multithreading.runAsync(()-> {
+                        Multithreading.runAsync(() -> {
                             if (!PlayerUtils.isValidPlayer(playerName)) return; // This is not a real player.
                             String uuid = PlayerUtils.getUuid(playerName).toString();
                             // If it's a real player, just print their name for testing.

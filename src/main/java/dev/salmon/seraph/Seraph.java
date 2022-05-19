@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
-import java.util.Arrays;
 
 @Mod(modid = Seraph.ID, name = Seraph.NAME, version = Seraph.VER)
 public class Seraph {
@@ -23,6 +22,16 @@ public class Seraph {
     private static Seraph INSTANCE;
 
     private SeraphConfig config;
+
+    public static void registerListeners(Object... objects) {
+        for (Object o : objects) {
+            MinecraftForge.EVENT_BUS.register(o);
+        }
+    }
+
+    public static Seraph getInstance() {
+        return INSTANCE;
+    }
 
     @Mod.EventHandler
     private void preInitialize(FMLPreInitializationEvent event) {
@@ -45,17 +54,7 @@ public class Seraph {
         new RequeueCommand().register();
     }
 
-    public static void registerListeners(Object... objects) {
-        for (Object o : objects) {
-            MinecraftForge.EVENT_BUS.register(o);
-        }
-    }
-
     public SeraphConfig getConfig() {
         return config;
-    }
-
-    public static Seraph getInstance() {
-        return INSTANCE;
     }
 }
