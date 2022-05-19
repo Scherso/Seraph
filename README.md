@@ -55,6 +55,10 @@
      
 </details>
 
+<br />
+
+**Feel free to fork and open PRs if you find anything you can improve upon. Also, if you find any issues, please open an Issue, it will be resolved quickly.**
+
 [forge189]: https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html
 [download]: https://youtu.be/dQw4w9WgXcQ
 [gradlewiki]: https://github.com/Scherso/Seraph/wiki/Build-with-Gradle
