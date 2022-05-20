@@ -1,7 +1,11 @@
+import groovy.lang.MissingPropertyException
+
 pluginManagement {
     repositories {
+        // Standard repositories
         mavenCentral()
         gradlePluginPortal()
+
         // Architectury
         maven("https://maven.architectury.dev/")
         // Fabric
@@ -12,8 +16,15 @@ pluginManagement {
         maven("https://maven.minecraftforge.net/")
         // Jitpack
         maven("https://jitpack.io/")
+
+        // Other
+        maven("https://s01.oss.sonatype.org/content/groups/public/")
+
+        // The local repository
+        mavenLocal()
     }
 }
 
-val projectName: String by settings
+val projectName = extra["mod.name"]?.toString()
+    ?: throw MissingPropertyException("mod.name was not set.")
 rootProject.name = projectName

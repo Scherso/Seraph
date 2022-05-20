@@ -16,7 +16,7 @@ import java.io.File;
 
 @Mod(modid = Seraph.ID, name = Seraph.NAME, version = Seraph.VER)
 public class Seraph {
-    public static final String NAME = "@NAME@", VER = "@VERSION@", ID = "@ID@";
+    public static final String NAME = "@MOD_NAME@", VER = "@MOD_VERSION@", ID = "@MOD_ID@";
 
     @Mod.Instance(ID)
     private static Seraph INSTANCE;
@@ -35,7 +35,7 @@ public class Seraph {
 
     @Mod.EventHandler
     private void preInitialize(FMLPreInitializationEvent event) {
-        File configFile = new File(new File(event.getModConfigurationDirectory(), "Seraph"), ID + ".toml");
+        File configFile = new File(new File(event.getModConfigurationDirectory(), NAME), ID + ".toml");
         if (!configFile.getParentFile().exists() && !configFile.getParentFile().mkdirs())
             throw new IllegalStateException("Could not create config directory!");
         config = new SeraphConfig(configFile);
