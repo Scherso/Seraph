@@ -21,9 +21,6 @@ loomHelper {
     useTweaker("gg.essential.loader.stage0.EssentialSetupTweaker")
 }
 
-val shade by configurations.creating
-configurations.implementation.get().extendsFrom(shade)
-
 dependencies {
     unishade("gg.essential:loader-launchwrapper:1.1.3")
     compileOnly(libs.essential)
