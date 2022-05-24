@@ -9,6 +9,7 @@ import gg.essential.vigilance.data.PropertyType;
 import java.io.File;
 
 public class SeraphConfig extends Vigilant {
+
     @Property(
             type = PropertyType.TEXT,
             name = "API Key",
@@ -16,7 +17,8 @@ public class SeraphConfig extends Vigilant {
             category = "General",
             placeholder = "/api new, or /seraph apikey <apikey>",
             protectedText = true
-    ) private String apiKey = "";
+    )
+    private String apiKey = "";
 
     public SeraphConfig(File configFile) {
         super(configFile, ChatColor.GOLD + Seraph.NAME);
@@ -39,20 +41,20 @@ public class SeraphConfig extends Vigilant {
      * Sets the API key used for Hypixel API requests.
      *
      * @param apiKey The new value to set the config option to.
-     * @param save Whether this should be saved to the config file or not.
      */
-    public void setApiKey(String apiKey, boolean save) {
-        this.apiKey = apiKey;
-        if (save) saveConfig();
+    public void setApiKey(String apiKey) {
+        setApiKey(apiKey, true);
     }
 
     /**
      * Sets the API key used for Hypixel API requests.
      *
      * @param apiKey The new value to set the config option to.
+     * @param save   Whether this should be saved to the config file or not.
      */
-    public void setApiKey(String apiKey) {
-        setApiKey(apiKey, true);
+    public void setApiKey(String apiKey, boolean save) {
+        this.apiKey = apiKey;
+        if (save) saveConfig();
     }
 
 }

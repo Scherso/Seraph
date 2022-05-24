@@ -49,16 +49,15 @@ public class SeraphCommand extends Command {
 
     @SubCommand(value = "info")
     public void handleInfo() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(ChatColor.STRIKETHROUGH).append("------------------").append("\n");
-        builder.append(ChatColor.GRAY).append("Credits:").append("\n");
-        builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.DARK_RED).append("+").append(ChatColor.AQUA).append("] Scherso").append("\n");
-        builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.GREEN).append("+").append(ChatColor.AQUA).append("] KnightsWhoSayNi_ ").append(ChatColor.GRAY).append("(Answering questions)").append("\n");
-        builder.append(ChatColor.GREEN).append("[VIP] exejar ").append(ChatColor.GRAY).append("(Hypixel API library)").append("\n");
-        builder.append(ChatColor.GREEN).append("[VIP] You_ded ").append(ChatColor.GRAY).append("(Being Cool)").append("\n");
-        builder.append(ChatColor.AQUA).append("[MVP").append(ChatColor.DARK_GREEN).append("+").append(ChatColor.AQUA).append("] Deftu ").append(ChatColor.GRAY).append("(General clean-up)").append("\n");
-        builder.append(ChatColor.STRIKETHROUGH).append("------------------");
-        ChatUtils.show(builder.toString(), false);
+        String builder = ChatColor.STRIKETHROUGH + "------------------" + "\n" +
+                ChatColor.GRAY + "Credits:" + "\n" +
+                ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso" + "\n" +
+                ChatColor.AQUA + "[MVP" + ChatColor.GREEN + "+" + ChatColor.AQUA + "] KnightsWhoSayNi_ " + ChatColor.GRAY + "(Answering questions)" + "\n" +
+                ChatColor.GREEN + "[VIP] exejar " + ChatColor.GRAY + "(Hypixel API library)" + "\n" +
+                ChatColor.GREEN + "[VIP] You_ded " + ChatColor.GRAY + "(Being Cool)" + "\n" +
+                ChatColor.AQUA + "[MVP" + ChatColor.DARK_GREEN + "+" + ChatColor.AQUA + "] Deftu " + ChatColor.GRAY + "(General clean-up)" + "\n" +
+                ChatColor.STRIKETHROUGH + "------------------";
+        ChatUtils.show(builder, false);
     }
 
     public Set<Alias> getCommandAliases() {
