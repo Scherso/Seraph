@@ -74,6 +74,7 @@ public class LocrawUtils {
         if (!sentCommand) return;
         try {
             final String msg = EnumChatFormatting.getTextWithoutFormattingCodes(event.message.getUnformattedText());
+            // Checking for rate limitation.
             if (!JsonUtils.isValidJson(msg)) {
                 if (msg.contains("You are sending too many commands! Please try again in a few seconds.")) // if you're being rate limited, the /locraw command will be resent in 5 seconds.
                     queueUpdate(5000);
@@ -85,28 +86,25 @@ public class LocrawUtils {
             JsonObject json = raw.getAsJsonObject();
             LocrawInfo parsed = JsonUtils.getGson().fromJson(json, LocrawInfo.class);
 
-            // Basic limbo checks. Hypixel occasionally sends false limbo data, thus we need to make sure we're in limbo.
             if (5 > limboLoop && parsed.getGameType() == LocrawInfo.GameType.LIMBO) {
                 sentCommand = false;
                 limboLoop++;
                 queueUpdate(1000);
             } else locraw = parsed; // if the player isn't in limbo, the parsed info is used.
+
             if (locraw != null) {
                 locraw.setGameType(LocrawInfo.GameType.getFromLocraw(this.locraw.getRawGameType()));
+                
+                // boolean inBedwarsGame = (!parsed.getGameMode().equals("lobby") && parsed.getGameType() == LocrawInfo.GameType.BEDWARS); // Bedwars Game Check
+                // boolean inSkywarsGame = (!parsed.getGameMode().equals("lobby") && parsed.getGameType() == LocrawInfo.GameType.SKYWARS); // Skywars Game Check
+                this.inDuelsGame = (!parsed.getGameMode().equals("lobby") && parsed.getGameType() == LocrawInfo.GameType.DUELS); // Duels Game Check
 
-                // In game checks for duels queue.
-                if (!parsed.getGameMode().equals("lobby") && parsed.getGameType() == LocrawInfo.GameType.DUELS) {
-                    inDuelsGame = true;
-                    MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(this.locraw));
-                }
-
-                // general in game check for any gamemode.
                 if (parsed.getGameMode().equals("lobby")) {
-                    inGame = false;
+                    inGame = false; // If your gamemode returns "lobby", boolean inGame is false.
                     MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinLobby(locraw));
                 } else {
                     lastLocraw = parsed;
-                    inGame = true;
+                    inGame = true; // If your gamemode does not return "lobby", boolean inGame is true.
                     MinecraftForge.EVENT_BUS.post(new LocrawEvent.JoinGame(locraw));
                 }
 
