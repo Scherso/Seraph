@@ -40,6 +40,7 @@
   - `/seraph info` Sends a chat message with information regarding Seraph.
   - `/seraph setapikey` Allows you to set your Hypixel API key without running `/api new`
   - `/seraph getapikey` Sends a chat message with your api key, upon clicking you can copy it.
+  - `/requeue` Requeues you to the last game you where in, alias: `/rq`
   - Sending a message with an invalid subcommand will send command usages.
      
 </details>
