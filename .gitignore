@@ -22,6 +22,8 @@ classes
 build
 .gradle
 
+!build/libs
+
 #Netbeans
 .nb-gradle
 .nb-gradle-properties
