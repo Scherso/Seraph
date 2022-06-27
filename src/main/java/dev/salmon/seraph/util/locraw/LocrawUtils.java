@@ -77,7 +77,7 @@ public class LocrawUtils {
             // Checking for rate limitation.
             if (!JsonUtils.isValidJson(msg)) {
                 if (msg.contains("You are sending too many commands! Please try again in a few seconds.")) // if you're being rate limited, the /locraw command will be resent in 5 seconds.
-                    queueUpdate(5000);
+                    queueUpdate(4900);
                 return;
             }
 
