@@ -40,6 +40,10 @@ public class HypixelAPI {
         }
     }
 
+    /**
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels wins
+     */
     public String getDuelsWins(String uuid) {
         String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", this.key, uuid.replace("-", ""));
         try (CloseableHttpClient client = HttpClients.createDefault()) {
@@ -51,6 +55,78 @@ public class HypixelAPI {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
                 return object.get("bridge_duel_wins").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels losses
+     */
+    public String getDuelsLosses(String uuid) {
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", this.key, uuid.replace("-", ""));
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(requestURL);
+
+            System.out.println("Stat checking " + uuid);
+
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                return object.get("bridge_duel_losses").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels kills
+     */
+    public String getDuelsKills(String uuid) {
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", this.key, uuid.replace("-", ""));
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(requestURL);
+
+            System.out.println("Stat checking " + uuid);
+
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                return object.get("bridge_duel_deaths").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels deaths
+     */
+    public String getDuelsDeaths(String uuid) {
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", this.key, uuid.replace("-", ""));
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(requestURL);
+
+            System.out.println("Stat checking " + uuid);
+
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                return object.get("bridge_duel_deaths").getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
