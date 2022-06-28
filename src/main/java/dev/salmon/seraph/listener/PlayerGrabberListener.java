@@ -34,6 +34,12 @@ public class PlayerGrabberListener {
                             String uuid = PlayerUtils.getUuid(playerName).toString();
                             // If it's a real player, just print their name for testing.
                             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("name: " + playerName + "\nuuid: " + uuid));
+                            String wins = hypixelAPI.getDuelsWins(uuid);
+                            String losses = hypixelAPI.getDuelsLosses(uuid);
+                            String kills = hypixelAPI.getDuelsKills(uuid);
+                            String deaths = hypixelAPI.getDuelsDeaths(uuid);
+                            double wlr = Double.parseDouble(wins) / Double.parseDouble(losses);
+                            double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
                         });
                     }
                 }
