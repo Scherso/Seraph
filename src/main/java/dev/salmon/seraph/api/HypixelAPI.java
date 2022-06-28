@@ -17,6 +17,10 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
 public class HypixelAPI {
+    public HypixelAPI(String key) {
+        this.key = key;
+    }
+
     public JsonObject achievementObj;
     public JsonObject playerObject;
 
@@ -25,7 +29,7 @@ public class HypixelAPI {
      * @param game        Game Stats to retrieve
      * @return JsonObject of the specified gameType's Stats
      */
-    public static JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
+    public JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
         JsonObject player = wholeObject.get("player").getAsJsonObject();
         JsonObject stats = player.get("stats").getAsJsonObject();
 
@@ -36,8 +40,8 @@ public class HypixelAPI {
         }
     }
 
-    public static String getDuelsWins(String uuid) {
-        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
+    public String getDuelsWins(String uuid) {
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", this.key, uuid.replace("-", ""));
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(requestURL);
 
@@ -71,7 +75,7 @@ public class HypixelAPI {
             // String.format is basically constructing a String. %s is a placeholder which is defined by the strings placed after the initial String.
             // so String.format("%s", "hello"); is the same as "hello"
             // String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid); is basically placing the key in the first placeholder, and uuid in the second
-            String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
+            String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", this.key, uuid.replace("-", ""));
             try (CloseableHttpClient client = HttpClients.createDefault()) {
                 HttpGet request = new HttpGet(requestURL);
                 JsonParser parser = new JsonParser();
@@ -108,4 +112,14 @@ public class HypixelAPI {
         this.playerObject = player;
         return obj;
     }
+
+    public String getKey() {
+        return this.key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    private String key;
 }
