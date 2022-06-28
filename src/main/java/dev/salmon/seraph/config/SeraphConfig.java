@@ -20,38 +20,6 @@ public class SeraphConfig extends Vigilant {
     )
     private String apiKey = "";
 
-    @Property(
-            type = PropertyType.NUMBER,
-            name = "Dodge WLR",
-            description = "Dodges WLR above given value. ",
-            category = "Autododge"
-    )
-    private int dodgeWlr;
-
-    @Property(
-            type = PropertyType.NUMBER,
-            name = "Dodge KDR",
-            description = "Dodges KDR above given value. ",
-            category = "Autododge"
-    )
-    private int dodgeKdr;
-
-    @Property(
-            type = PropertyType.NUMBER,
-            name = "Dodge wins",
-            description = "Dodges wins above given value. ",
-            category = "Autododge"
-    )
-    private int dodgeWins;
-
-    @Property(
-            type = PropertyType.NUMBER,
-            name = "Dodge kills",
-            description = "Dodges kills above given value. ",
-            category = "Autododge"
-    )
-    private int dodgeKills;
-
     public SeraphConfig(File configFile) {
         super(configFile, ChatColor.GOLD + Seraph.NAME);
         initialize();
@@ -89,35 +57,4 @@ public class SeraphConfig extends Vigilant {
         if (save) saveConfig();
     }
 
-    public void setDodgeKdr(int dodgeKdr) {
-        this.dodgeKdr = dodgeKdr;
-    }
-
-    public void setDodgeKills(int dodgeKills) {
-        this.dodgeKills = dodgeKills;
-    }
-
-    public void setDodgeWins(int dodgeWins) {
-        this.dodgeWins = dodgeWins;
-    }
-
-    public void setDodgeWlr(int dodgeWlr) {
-        this.dodgeWlr = dodgeWlr;
-    }
-
-    public int getDodgeKdr() {
-        return dodgeKdr;
-    }
-
-    public int getDodgeKills() {
-        return dodgeKills;
-    }
-
-    public int getDodgeWins() {
-        return dodgeWins;
-    }
-
-    public int getDodgeWlr() {
-        return dodgeWlr;
-    }
 }
