@@ -1,5 +1,7 @@
 package dev.salmon.seraph.listener;
 
+import dev.salmon.seraph.Seraph;
+import dev.salmon.seraph.api.HypixelAPI;
 import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.PlayerUtils;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
@@ -13,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerGrabberListener {
+    public PlayerGrabberListener() {
+        hypixelAPI = new HypixelAPI(Seraph.getInstance().getConfig().getApiKey());
+    }
     List<String> playerList = new ArrayList<>();
 
     @SubscribeEvent
@@ -35,4 +40,6 @@ public class PlayerGrabberListener {
             }
         }
     }
+
+    private HypixelAPI hypixelAPI;
 }
