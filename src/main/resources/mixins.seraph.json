@@ -5,7 +5,6 @@
     "refmap": "mixins.seraph.refmap.json",
     "verbose": true,
     "mixins": [
-        "ModListMixin",
-        "HypixelUtilsMixin"
+        "ModListMixin"
     ]
 }
