@@ -21,7 +21,7 @@ public class HypixelAPI {
 
     public JsonObject achievementObj;
     public JsonObject playerObject;
-    public static String gamemode = LocrawUtils.getInstance().getLocrawInfo().getGameMode().toLowerCase().replace("duels_", "") + "_wins";
+    public static String gamemode = LocrawUtils.getInstance().getLocrawInfo().getGameMode().toLowerCase().replace("duels_", "");
 
     /**
      * @param uuid Target Player's Hypixel API Whole Object
@@ -37,7 +37,10 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get(gamemode).getAsString();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_wins").getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -61,7 +64,10 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get(gamemode).getAsString();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_losses").getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -85,7 +91,10 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get(gamemode).getAsString();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_kills").getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -109,7 +118,10 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get(gamemode).getAsString();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_deaths").getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }

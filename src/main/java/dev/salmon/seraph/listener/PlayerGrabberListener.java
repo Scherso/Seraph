@@ -33,15 +33,15 @@ public class PlayerGrabberListener {
                             if (!PlayerUtils.isValidPlayer(playerName)) return; // This is not a real player.
                             String uuid = PlayerUtils.getUuid(playerName).toString();
                             // If it's a real player, just print their name for testing.
-                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("[Test] Name: " + playerName + "\nUUID: " + uuid));
 
                             // Get player stats
                             String wins = HypixelAPI.getDuelsWins(uuid);
                             String losses = HypixelAPI.getDuelsLosses(uuid);
-                            String kills = HypixelAPI.getDuelsKills(uuid);
-                            String deaths = HypixelAPI.getDuelsDeaths(uuid);
+                            //String kills = HypixelAPI.getDuelsKills(uuid);
+                            //String deaths = HypixelAPI.getDuelsDeaths(uuid);
                             double wlr = Double.parseDouble(wins) / Double.parseDouble(losses);
-                            double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
+                            // double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
+                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Name: " + playerName + "\nUUID: " + uuid + "\nWins: " + wins + " Loss: " + losses + " W/L: " + wlr));
                         });
                     }
                 }
