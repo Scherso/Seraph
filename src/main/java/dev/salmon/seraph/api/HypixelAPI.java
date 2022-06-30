@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.api.exception.*;
+import dev.salmon.seraph.util.locraw.LocrawUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -17,25 +18,15 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
 public class HypixelAPI {
+
     public JsonObject achievementObj;
     public JsonObject playerObject;
+    public static String gamemode = LocrawUtils.getInstance().getLocrawInfo().getGameMode().toLowerCase().replace("duels_", "");
 
     /**
-     * @param wholeObject Target Player's Hypixel API Whole Object
-     * @param game        Game Stats to retrieve
-     * @return JsonObject of the specified gameType's Stats
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels wins
      */
-    public static JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
-        JsonObject player = wholeObject.get("player").getAsJsonObject();
-        JsonObject stats = player.get("stats").getAsJsonObject();
-
-        if (stats.get(game.getApiName()) != null) {
-            return stats.get(game.getApiName()).getAsJsonObject();
-        } else {
-            throw new GameNullException(game);
-        }
-    }
-
     public static String getDuelsWins(String uuid) {
         String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
         try (CloseableHttpClient client = HttpClients.createDefault()) {
@@ -46,7 +37,10 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get("bridge_duel_wins").getAsString();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_wins").getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -54,6 +48,103 @@ public class HypixelAPI {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels losses
+     */
+    public static String getDuelsLosses(String uuid) {
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(requestURL);
+
+            System.out.println("Stat checking " + uuid);
+
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_losses").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels kills
+     */
+    public static String getDuelsKills(String uuid) {
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(requestURL);
+
+            System.out.println("Stat checking " + uuid);
+
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_kills").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param uuid Target Player's Hypixel API Whole Object
+     * @return String of the specified player's duels deaths
+     */
+    public static String getDuelsDeaths(String uuid) {
+        String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(requestURL);
+
+            System.out.println("Stat checking " + uuid);
+
+            try (InputStream is = client.execute(request).getEntity().getContent()) {
+                JsonParser jsonParser = new JsonParser();
+                JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                JsonObject player = object.get("player").getAsJsonObject();
+                JsonObject stats = player.get("stats").getAsJsonObject();
+                JsonObject duels = stats.get("Duels").getAsJsonObject();
+                return duels.get(gamemode + "_deaths").getAsString();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param wholeObject Target Player's Hypixel API Whole Object
+     * @param game        Game Stats to retrieve
+     * @return JsonObject of the specified gameType's Stats
+     */
+    public JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
+        JsonObject player = wholeObject.get("player").getAsJsonObject();
+        JsonObject stats = player.get("stats").getAsJsonObject();
+
+        if (stats.get(game.getApiName()) != null) {
+            return stats.get(game.getApiName()).getAsJsonObject();
+        } else {
+            throw new GameNullException(game);
+        }
     }
 
     /**
@@ -108,4 +199,5 @@ public class HypixelAPI {
         this.playerObject = player;
         return obj;
     }
+
 }

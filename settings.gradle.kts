@@ -2,25 +2,21 @@ import groovy.lang.MissingPropertyException
 
 pluginManagement {
     repositories {
-        // Standard repositories
-        mavenCentral()
+        // Default repositories
         gradlePluginPortal()
+        mavenCentral()
 
-        // Architectury
+        // Repositories
+        maven("https://maven.unifycraft.xyz/releases")
+        maven("https://maven.fabricmc.net")
         maven("https://maven.architectury.dev/")
-        // Fabric
-        maven("https://maven.fabricmc.net/")
-        // Essential
-        maven("https://repo.essential.gg/repository/maven-public/")
-        // Forge
-        maven("https://maven.minecraftforge.net/")
-        // Jitpack
+        maven("https://maven.minecraftforge.net")
+        maven("https://repo.essential.gg/repository/maven-public")
         maven("https://jitpack.io/")
 
-        // Other
+        // Snapshots
+        maven("https://maven.unifycraft.xyz/snapshots")
         maven("https://s01.oss.sonatype.org/content/groups/public/")
-
-        // The local repository
         mavenLocal()
     }
 }
@@ -28,3 +24,4 @@ pluginManagement {
 val projectName = extra["mod.name"]?.toString()
     ?: throw MissingPropertyException("mod.name was not set.")
 rootProject.name = projectName
+rootProject.buildFileName = "build.gradle.kts"
