@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.api.exception.*;
+import dev.salmon.seraph.util.locraw.LocrawUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -20,22 +21,7 @@ public class HypixelAPI {
 
     public JsonObject achievementObj;
     public JsonObject playerObject;
-
-    /**
-     * @param wholeObject Target Player's Hypixel API Whole Object
-     * @param game        Game Stats to retrieve
-     * @return JsonObject of the specified gameType's Stats
-     */
-    public JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
-        JsonObject player = wholeObject.get("player").getAsJsonObject();
-        JsonObject stats = player.get("stats").getAsJsonObject();
-
-        if (stats.get(game.getApiName()) != null) {
-            return stats.get(game.getApiName()).getAsJsonObject();
-        } else {
-            throw new GameNullException(game);
-        }
-    }
+    public static String gamemode = LocrawUtils.getInstance().getLocrawInfo().getGameMode().toLowerCase().replace("duels_", "") + "_wins";
 
     /**
      * @param uuid Target Player's Hypixel API Whole Object
@@ -51,7 +37,7 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get("bridge_duel_wins").getAsString();
+                return object.get(gamemode).getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -75,7 +61,7 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get("bridge_duel_losses").getAsString();
+                return object.get(gamemode).getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -99,7 +85,7 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get("bridge_duel_deaths").getAsString();
+                return object.get(gamemode).getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -123,7 +109,7 @@ public class HypixelAPI {
             try (InputStream is = client.execute(request).getEntity().getContent()) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
-                return object.get("bridge_duel_deaths").getAsString();
+                return object.get(gamemode).getAsString();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -131,6 +117,22 @@ public class HypixelAPI {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * @param wholeObject Target Player's Hypixel API Whole Object
+     * @param game        Game Stats to retrieve
+     * @return JsonObject of the specified gameType's Stats
+     */
+    public JsonObject getGameData(JsonObject wholeObject, HypixelGames game) throws GameNullException {
+        JsonObject player = wholeObject.get("player").getAsJsonObject();
+        JsonObject stats = player.get("stats").getAsJsonObject();
+
+        if (stats.get(game.getApiName()) != null) {
+            return stats.get(game.getApiName()).getAsJsonObject();
+        } else {
+            throw new GameNullException(game);
+        }
     }
 
     /**
