@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PlayerGrabberListener {
     public PlayerGrabberListener() {
-        hypixelAPI = new HypixelAPI(Seraph.getInstance().getConfig().getApiKey());
+
     }
     List<String> playerList = new ArrayList<>();
 
@@ -33,11 +33,13 @@ public class PlayerGrabberListener {
                             if (!PlayerUtils.isValidPlayer(playerName)) return; // This is not a real player.
                             String uuid = PlayerUtils.getUuid(playerName).toString();
                             // If it's a real player, just print their name for testing.
-                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("name: " + playerName + "\nuuid: " + uuid));
-                            String wins = hypixelAPI.getDuelsWins(uuid);
-                            String losses = hypixelAPI.getDuelsLosses(uuid);
-                            String kills = hypixelAPI.getDuelsKills(uuid);
-                            String deaths = hypixelAPI.getDuelsDeaths(uuid);
+                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("[Test] Name: " + playerName + "\nUUID: " + uuid));
+
+                            // Get player stats
+                            String wins = HypixelAPI.getDuelsWins(uuid);
+                            String losses = HypixelAPI.getDuelsLosses(uuid);
+                            String kills = HypixelAPI.getDuelsKills(uuid);
+                            String deaths = HypixelAPI.getDuelsDeaths(uuid);
                             double wlr = Double.parseDouble(wins) / Double.parseDouble(losses);
                             double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
                         });
@@ -46,6 +48,4 @@ public class PlayerGrabberListener {
             }
         }
     }
-
-    private HypixelAPI hypixelAPI;
 }
