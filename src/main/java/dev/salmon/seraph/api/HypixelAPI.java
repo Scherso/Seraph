@@ -224,23 +224,23 @@ public class HypixelAPI {
                         rank = (EnumChatFormatting.valueOf(monthlyRankColor) + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "++" + EnumChatFormatting.valueOf(monthlyRankColor) + "]");
                     }
 
-                    else if (rank.equals("MVP_PLUS")) {
+                    else if (newPackageRank.equals("MVP_PLUS")) {
                         rank = (EnumChatFormatting.AQUA + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "+" + EnumChatFormatting.AQUA + "]");
                     }
 
-                    else if (rank.equals("MVP")) {
+                    else if (newPackageRank.equals("MVP")) {
                         rank = (EnumChatFormatting.AQUA + "[MVP]");
                     }
 
-                    else if (rank.equals("VIP_PLUS")) {
+                    else if (newPackageRank.equals("VIP_PLUS")) {
                         rank = EnumChatFormatting.GREEN + "[VIP+]";
                     }
 
-                    else if (rank.equals("VIP")) {
+                    else if (newPackageRank.equals("VIP")) {
                         rank = EnumChatFormatting.GREEN + "[VIP]";
                     }
 
-                    else if (rank.equals("REGULAR")) {
+                    else if (newPackageRank.equals("REGULAR")) {
                         rank = "";
                     }
 
