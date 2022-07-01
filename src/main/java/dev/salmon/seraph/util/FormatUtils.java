@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class FormatUtils {
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("##.##");
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.###");
 
     public static Locale getLocale() {
         String language = System.getProperty("user.language");
