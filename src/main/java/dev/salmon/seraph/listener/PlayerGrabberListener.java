@@ -37,11 +37,12 @@ public class PlayerGrabberListener {
                             // Get player stats
                             String wins = HypixelAPI.getDuelsWins(uuid);
                             String losses = HypixelAPI.getDuelsLosses(uuid);
-                            //String kills = HypixelAPI.getDuelsKills(uuid);
-                            //String deaths = HypixelAPI.getDuelsDeaths(uuid);
+                            String kills = HypixelAPI.getDuelsKills(uuid);
+                            String deaths = HypixelAPI.getDuelsDeaths(uuid);
                             double wlr = Double.parseDouble(wins) / Double.parseDouble(losses);
-                            // double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
-                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Name: " + playerName + "\nUUID: " + uuid + "\nWins: " + wins + " Loss: " + losses + " W/L: " + wlr));
+                            double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
+
+
                         });
                     }
                 }
