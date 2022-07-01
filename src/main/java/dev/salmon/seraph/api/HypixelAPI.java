@@ -6,6 +6,8 @@ import com.google.gson.JsonSyntaxException;
 import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.api.exception.*;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -200,4 +202,55 @@ public class HypixelAPI {
         return obj;
     }
 
+        public static ChatComponentText getRank(String uuid) throws IOException {
+            String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
+            try (CloseableHttpClient client = HttpClients.createDefault()) {
+                HttpGet request = new HttpGet(requestURL);
+
+                System.out.println("Stat checking " + uuid);
+
+                try (InputStream is = client.execute(request).getEntity().getContent()) {
+                    JsonParser jsonParser = new JsonParser();
+                    JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
+                    JsonObject player = object.get("player").getAsJsonObject();
+
+                    String rank = null;
+                    String newPackageRank = player.get("newPackageRank").getAsString();
+                    String monthlyPackageRank = player.get("monthlyPackageRank").getAsString();
+                    String monthlyRankColor = player.get("monthlyRankColor").getAsString();
+                    String rankPlusColor = player.get("rankPlusColor").getAsString();
+
+                    if (!monthlyPackageRank.equals("NONE")) {
+                        rank = (EnumChatFormatting.valueOf(monthlyRankColor) + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "++" + EnumChatFormatting.valueOf(monthlyRankColor) + "]");
+                    }
+
+                    else if (rank.equals("MVP_PLUS")) {
+                        rank = (EnumChatFormatting.AQUA + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "+" + EnumChatFormatting.AQUA + "]");
+                    }
+
+                    else if (rank.equals("MVP")) {
+                        rank = (EnumChatFormatting.AQUA + "[MVP]");
+                    }
+
+                    else if (rank.equals("VIP_PLUS")) {
+                        rank = EnumChatFormatting.GREEN + "[VIP+]";
+                    }
+
+                    else if (rank.equals("VIP")) {
+                        rank = EnumChatFormatting.GREEN + "[VIP]";
+                    }
+
+                    else if (rank.equals("REGULAR")) {
+                        rank = "";
+                    }
+
+                    ChatComponentText chatComponentText = new ChatComponentText(rank);
+
+                    return chatComponentText;
+                }
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
 }
