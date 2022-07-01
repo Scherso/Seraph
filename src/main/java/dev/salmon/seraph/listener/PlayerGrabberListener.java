@@ -1,7 +1,7 @@
 package dev.salmon.seraph.listener;
 
-import dev.salmon.seraph.Seraph;
 import dev.salmon.seraph.api.HypixelAPI;
+import dev.salmon.seraph.util.FormatUtils;
 import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.PlayerUtils;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerGrabberListener {
-    public PlayerGrabberListener() {
-
-    }
     List<String> playerList = new ArrayList<>();
 
     @SubscribeEvent
@@ -39,9 +36,11 @@ public class PlayerGrabberListener {
                             String losses = HypixelAPI.getDuelsLosses(uuid);
                             //String kills = HypixelAPI.getDuelsKills(uuid);
                             //String deaths = HypixelAPI.getDuelsDeaths(uuid);
+
+                            // double wlr = FormatUtils.formatDouble(Integer.parseInt(wins), Integer.parseInt(losses));
                             double wlr = Double.parseDouble(wins) / Double.parseDouble(losses);
                             // double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
-                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Name: " + playerName + "\nUUID: " + uuid + "\nWins: " + wins + " Loss: " + losses + " W/L: " + wlr));
+                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Name: " + playerName + "\nUUID: " + uuid + "\nWins: " + wins + " Loss: " + losses + " W/L: " + FormatUtils.splitNumber(wlr)));
                         });
                     }
                 }
