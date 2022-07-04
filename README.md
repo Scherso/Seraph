@@ -36,6 +36,7 @@
         Commands</summary>
   
   ## Commands
+  - `Aliases: statchecker, duelsniffer, duelsniff and Seraph`
   - `/seraph` Opens the configuration screen.
   - `/seraph info` Sends a chat message with information regarding Seraph.
   - `/seraph setapikey` Allows you to set your Hypixel API key without running `/api new`
@@ -59,7 +60,7 @@
 <br />
 
 <h4 align="center">
-     Feel free to fork and open PRs if you find anything you can improve upon. Also, if you find any issues, please open an Issue, it will be resolved quickly. Also, this probably doesn't work with OneConfig, it's their issue, not mine!
+     Feel free to fork and open PRs if you find anything you can improve upon. Also, if you find any issues, please open an Issue, it will be resolved quickly. Also, this probably doesn't work with OneConfig, it's their issue, not ours!
 </h4>
 
 [forge189]: https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html
