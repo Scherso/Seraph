@@ -52,6 +52,7 @@ public class SeraphCommand extends Command {
         String builder = ChatColor.STRIKETHROUGH + "------------------" + "\n" +
                 ChatColor.GRAY + "Credits:" + "\n" +
                 ChatColor.AQUA + "[MVP" + ChatColor.DARK_RED + "+" + ChatColor.AQUA + "] Scherso" + "\n" +
+                ChatColor.AQUA + "[MVP" + ChatColor.BLACK + "+" + ChatColor.AQUA + "] Xasr " + ChatColor.GRAY + "(Contributor)" + "\n" +
                 ChatColor.AQUA + "[MVP" + ChatColor.GREEN + "+" + ChatColor.AQUA + "] KnightsWhoSayNi_ " + ChatColor.GRAY + "(Answering questions)" + "\n" +
                 ChatColor.GREEN + "[VIP] exejar " + ChatColor.GRAY + "(Hypixel API library)" + "\n" +
                 ChatColor.GREEN + "[VIP] You_ded " + ChatColor.GRAY + "(Being Cool)" + "\n" +
