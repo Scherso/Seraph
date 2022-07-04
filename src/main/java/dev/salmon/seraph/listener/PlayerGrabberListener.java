@@ -11,8 +11,11 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static dev.salmon.seraph.api.HypixelAPI.getRank;
 
 public class PlayerGrabberListener {
     List<String> playerList = new ArrayList<>();
@@ -40,7 +43,13 @@ public class PlayerGrabberListener {
                             // double wlr = FormatUtils.formatDouble(Integer.parseInt(wins), Integer.parseInt(losses));
                             double wlr = Double.parseDouble(wins) / Double.parseDouble(losses);
                             // double kdr = Double.parseDouble(kills) / Double.parseDouble(deaths);
-                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Name: " + playerName + "\nUUID: " + uuid + "\nWins: " + wins + " Loss: " + losses + " W/L: " + FormatUtils.splitNumber(wlr)));
+
+                            try {
+                                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText((HypixelAPI.getRank(uuid)) + " " + playerName)); // Rank Getter
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Name: " + playerName + "\nUUID: " + uuid + "\nWins: " + wins + " Losses: " + losses + " W/L: " + FormatUtils.splitNumber(wlr)));
                         });
                     }
                 }
