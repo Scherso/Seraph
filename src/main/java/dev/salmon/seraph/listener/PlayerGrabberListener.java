@@ -1,10 +1,12 @@
 package dev.salmon.seraph.listener;
 
 import dev.salmon.seraph.api.HypixelAPI;
+import dev.salmon.seraph.util.DuelsUtils;
 import dev.salmon.seraph.util.FormatUtils;
 import dev.salmon.seraph.util.Multithreading;
 import dev.salmon.seraph.util.PlayerUtils;
 import dev.salmon.seraph.util.locraw.LocrawUtils;
+import gg.essential.universal.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.ChatComponentText;
