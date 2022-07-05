@@ -1,12 +1,13 @@
 import xyz.unifycraft.gradle.utils.GameSide
 
 plugins {
-    kotlin("jvm") version("1.6.21")
+    kotlin("jvm") version("1.7.0")
     java
-    id("xyz.unifycraft.gradle.tools") version("1.6.1")
-    id("xyz.unifycraft.gradle.tools.loom") version("1.6.1")
-    id("xyz.unifycraft.gradle.tools.shadow") version("1.6.1")
-    id("xyz.unifycraft.gradle.tools.blossom") version("1.6.1")
+    val ucgt = "1.7.0"
+    id("xyz.unifycraft.gradle.tools") version(ucgt)
+    id("xyz.unifycraft.gradle.tools.loom") version(ucgt)
+    id("xyz.unifycraft.gradle.tools.shadow") version(ucgt)
+    id("xyz.unifycraft.gradle.tools.blossom") version(ucgt)
 }
 
 unifycraft {
