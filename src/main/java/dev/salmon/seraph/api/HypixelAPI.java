@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class HypixelAPI {
 
@@ -202,7 +203,7 @@ public class HypixelAPI {
         return obj;
     }
 
-        public static ChatComponentText getRank(String uuid) throws IOException {
+        public static String getRank(String uuid) throws IOException {
             String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", Seraph.getInstance().getConfig().getApiKey(), uuid.replace("-", ""));
             try (CloseableHttpClient client = HttpClients.createDefault()) {
                 HttpGet request = new HttpGet(requestURL);
@@ -215,40 +216,47 @@ public class HypixelAPI {
                     JsonObject player = object.get("player").getAsJsonObject();
 
                     String rank = null;
-                    String newPackageRank = player.get("newPackageRank").getAsString();
-                    String monthlyPackageRank = player.get("monthlyPackageRank").getAsString();
-                    String monthlyRankColor = player.get("monthlyRankColor").getAsString();
-                    String rankPlusColor = player.get("rankPlusColor").getAsString();
+                    String newPackageRank = "REGULAR";
+                    String monthlyPackageRank = "NONE";
+                    String monthlyRankColor = "";
+                    String rankPlusColor = "";
 
-                    if (!monthlyPackageRank.equals("NONE")) {
-                        rank = (EnumChatFormatting.valueOf(monthlyRankColor) + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "++" + EnumChatFormatting.valueOf(monthlyRankColor) + "]");
+                    try {
+                        newPackageRank = player.get("newPackageRank").getAsString();
+                        monthlyPackageRank = player.get("monthlyPackageRank").getAsString();
+                        monthlyRankColor = player.get("monthlyRankColor").getAsString();
+                        rankPlusColor = player.get("rankPlusColor").getAsString();
                     }
 
-                    else if (newPackageRank.equals("MVP_PLUS")) {
-                        rank = (EnumChatFormatting.AQUA + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "+" + EnumChatFormatting.AQUA + "]");
+                    catch (NullPointerException ex) {
+                        ex.printStackTrace();
                     }
 
-                    else if (newPackageRank.equals("MVP")) {
-                        rank = (EnumChatFormatting.AQUA + "[MVP]");
+                    switch (newPackageRank) {
+                        case "MVP_PLUS":
+                            rank = EnumChatFormatting.AQUA + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "+" + EnumChatFormatting.AQUA + "]";
+                            break;
+                        case "MVP":
+                            rank = EnumChatFormatting.AQUA + "[MVP]";
+                            break;
+                        case "VIP_PLUS":
+                            rank = EnumChatFormatting.GREEN + "[VIP+]";
+                            break;
+                        case "VIP":
+                            rank = EnumChatFormatting.GREEN + "[VIP]";
+                            break;
+                        case "REGULAR":
+                            rank = "";
+                            break;
                     }
 
-                    else if (newPackageRank.equals("VIP_PLUS")) {
-                        rank = EnumChatFormatting.GREEN + "[VIP+]";
+                    if (monthlyPackageRank.equals("SUPERSTAR")) {
+                        rank = EnumChatFormatting.valueOf(monthlyRankColor) + "[MVP" + EnumChatFormatting.valueOf(rankPlusColor) + "++" + EnumChatFormatting.valueOf(monthlyRankColor) + "]";
                     }
 
-                    else if (newPackageRank.equals("VIP")) {
-                        rank = EnumChatFormatting.GREEN + "[VIP]";
-                    }
-
-                    else if (newPackageRank.equals("REGULAR")) {
-                        rank = "";
-                    }
-
-                    ChatComponentText chatComponentText = new ChatComponentText(rank);
-
-                    return chatComponentText;
+                    return rank;
                 }
-            } catch (NullPointerException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
             return null;
