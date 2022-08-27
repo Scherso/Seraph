@@ -21,6 +21,12 @@ import static dev.salmon.seraph.api.HypixelAPI.getRank;
 
 public class PlayerGrabberListener {
     List<String> playerList = new ArrayList<>();
+    
+    /* To allow repeated grabbing of the same player */
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event) {
+        playerList.clear();
+    }
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
