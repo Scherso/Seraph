@@ -29,7 +29,7 @@ assignees: Scherso
   ## Steps to reproduce this issue:
   1. Forge Version (ex `11.15.1.2318`): 
   2. Java Version:
-  3. latest.log, upload via [hastebin][hst]
+  3. latest.log, upload via [hastebin][hst].
   4. A list of mods in your mods folder, either screenshot or list:
      
 </details>
@@ -46,7 +46,7 @@ assignees: Scherso
 <br />
 
 ### Make sure you have:
-- Uploaded all logs to [Hastebin][hst]
+- Uploaded all logs to [Hastebin][hst].
 - Uploaded all images to any image host.
 - Uploaded all videos to [Streamable][streamable].
  
