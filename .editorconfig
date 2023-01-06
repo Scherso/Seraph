@@ -1,3 +1,15 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.{java,kts}]
+tab_width = 4
+indent_style = tab
+
 [*.{json,info}]
 indent_size = 4
-indent_char = space
+indent_style = space
