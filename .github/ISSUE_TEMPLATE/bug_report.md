@@ -46,8 +46,9 @@ assignees: Scherso
 <br />
 
 ### Make sure you have:
-- Uploaded all logs to [hastebin][hst]
+- Uploaded all logs to [Hastebin][hst]
 - Uploaded all images to any image host.
-- Uploaded all videos to [streamable](streamable.com)
+- Uploaded all videos to [Streamable][streamable].
  
 [hst]: https://www.toptal.com/developers/hastebin/
+[streamable]: https://streamable.com
