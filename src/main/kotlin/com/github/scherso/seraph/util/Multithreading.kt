@@ -3,7 +3,7 @@ package com.github.scherso.seraph.util
 import com.google.common.util.concurrent.ThreadFactoryBuilder
 import java.util.concurrent.*
 
-public class Multithreading {
+class Multithreading {
 
     /**
      * Thread pool for the scheduler.

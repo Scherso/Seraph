@@ -26,3 +26,20 @@ repositories {
 dependencies {
     compileOnly("com.github.weave-mc:weave-loader:6a9e6a3245")
 }
+
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    inputs.property("version", project.version)
+    inputs.property("mcversion", mcVersion)
+    inputs.property("id", projectId)
+
+    filesMatching("weave.mod.json") {
+        expand(mapOf(
+            "id"        to projectId,
+            "name"      to projectName,
+            "group"     to projectGroup,
+            "version"   to projectVersion,
+            "mcversion" to mcVersion,
+        ))
+    }
+}
