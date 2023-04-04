@@ -31,6 +31,7 @@ class LocrawInfo {
     /**
      * @return The raw gametype from the serialized JSON as a [String] object.
      */
+    @SerializedName("gametype")
     val rawGameType: String? = null
 
     enum class GameType(val serverName: String) {
