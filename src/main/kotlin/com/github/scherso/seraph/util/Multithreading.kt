@@ -28,6 +28,6 @@ public class Multithreading {
      * @return ScheduledFuture runnable
      */
     fun schedule(runnable: Runnable?, delay: Long, timeUnit: TimeUnit?): ScheduledFuture<*> {
-        return this.runnable.schedule(runnable!!, delay, timeUnit)
+        return this.runnable.schedule(runnable!!, delay, timeUnit!!)
     }
 }
