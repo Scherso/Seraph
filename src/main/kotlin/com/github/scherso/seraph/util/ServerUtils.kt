@@ -1,4 +1,4 @@
-package com.github.scherso.seraph.util.location
+package com.github.scherso.seraph.util
 
 import net.minecraft.client.Minecraft
 
