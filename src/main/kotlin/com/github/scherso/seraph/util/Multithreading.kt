@@ -3,7 +3,7 @@ package com.github.scherso.seraph.util
 import com.google.common.util.concurrent.ThreadFactoryBuilder
 import java.util.concurrent.*
 
-class Multithreading {
+public class Multithreading {
 
     /**
      * Thread pool for the scheduler.
@@ -20,26 +20,6 @@ class Multithreading {
      */
     private val runnable: ScheduledExecutorService =
         ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors() + 1)
-
-    /**
-     * Schedules a task to be executed after a delay.
-     *
-     * @param runnable runnable to be submitted and executed.
-     */
-    fun runAsync(runnable: Runnable?) {
-        runnable?.let { pool.submit(it) }
-    }
-
-    /**
-     * Schedules tasks to be executed after a delay in a foreach loop.
-     *
-     * @param runnables runnables to be submitted and executed.
-     */
-    fun runAsync(vararg runnables: Runnable?) {
-        for (runnable in runnables) {
-            this.runAsync(runnable)
-        }
-    }
 
     /**
      * @param runnable Runnable to be executed
