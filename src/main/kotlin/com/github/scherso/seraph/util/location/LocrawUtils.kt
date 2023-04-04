@@ -13,6 +13,9 @@ import com.google.gson.JsonParser
 import net.minecraft.client.Minecraft
 import java.util.concurrent.TimeUnit
 
+/**
+ * @author Scherso, (Sam)
+ */
 class LocrawUtils {
 
     private var tick:       Int         = 0
@@ -87,14 +90,14 @@ class LocrawUtils {
 
         // Basic limbo check
         if (loop > 5 && parsed.gameType == LocrawInfo.GameType.LIMBO) {
-            sent = false;
+            sent = false
             loop++
             enqueue(1000)
         } else locraw = parsed // If the player is not in limbo, set their current location info the parsed var.
 
         if (locraw != null) {
             // My attempt at setting 'gameType' to the correct enum value.
-            locraw!!.gameType = locraw!!.rawGameType?.let { LocrawInfo.GameType.getFromLocraw(it) }
+            locraw!!.gameType to LocrawInfo.GameType.getFromLocraw(locraw!!.rawGameType!!)
             @Suppress("KotlinConstantConditions")
             if (parsed.gameMode != "lobby") {
                 inGame     = true
@@ -105,5 +108,4 @@ class LocrawUtils {
 
         event.cancelled = true
     }
-
 }
