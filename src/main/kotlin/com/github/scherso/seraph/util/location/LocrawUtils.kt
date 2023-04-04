@@ -93,6 +93,7 @@ class LocrawUtils {
         } else locraw = parsed // If the player is not in limbo, set their current location info the parsed var.
 
         if (locraw != null) {
+            // My attempt at setting 'gameType' to the correct enum value.
             locraw!!.gameType = locraw!!.rawGameType?.let { LocrawInfo.GameType.getFromLocraw(it) }
             @Suppress("KotlinConstantConditions")
             if (parsed.gameMode != "lobby") {
