@@ -1,5 +1,6 @@
 package com.github.scherso.seraph.util
 
+import com.github.scherso.seraph.NAME
 import com.google.common.util.concurrent.ThreadFactoryBuilder
 import java.util.concurrent.*
 
@@ -11,7 +12,7 @@ class Multithreading {
      * @see ExecutorService
      */
     private val pool: ExecutorService =
-        Executors.newCachedThreadPool(ThreadFactoryBuilder().setNameFormat("Aurora.ID" + "-%d").build())
+        Executors.newCachedThreadPool(ThreadFactoryBuilder().setNameFormat("$NAME-%d").build())
 
     /**
      * Scheduled executor service for the scheduler.

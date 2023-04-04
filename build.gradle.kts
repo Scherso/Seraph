@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.0"
+    id("net.kyori.blossom") version "1.3.1"
     id("com.github.weave-mc.weave") version "8b70bcc707"
 }
 
@@ -15,6 +16,12 @@ val mcVersion:      String = property("minecraft.version").toString()
 
 version = projectVersion
 group   = projectGroup
+
+blossom {
+    replaceToken("@VER@", projectVersion)
+    replaceToken("@NAME@", projectName)
+    replaceToken("@ID@", projectId)
+}
 
 minecraft.version("1.8.9")
 
