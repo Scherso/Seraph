@@ -2,6 +2,9 @@ package com.github.scherso.seraph.util.location
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * @author Scherso ([...](https://github.com/scherso/))
+ */
 class LocrawInfo {
 
     /**

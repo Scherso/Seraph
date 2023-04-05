@@ -1,9 +1,7 @@
 package com.github.scherso.seraph.util.location
 
-import club.maxstats.weave.loader.api.event.ChatReceivedEvent
-import club.maxstats.weave.loader.api.event.RenderWorldEvent
-import club.maxstats.weave.loader.api.event.SubscribeEvent
-import club.maxstats.weave.loader.api.event.TickEvent
+import club.maxstats.weave.loader.api.event.*
+import com.github.scherso.seraph.event.LocrawEvent
 import com.github.scherso.seraph.util.Multithreading
 import com.github.scherso.seraph.util.isOnHypixel
 import com.google.gson.GsonBuilder
@@ -100,10 +98,14 @@ class LocrawUtils {
             locraw!!.gameType to LocrawInfo.GameType.getFromLocraw(locraw!!.rawGameType!!)
             @Suppress("KotlinConstantConditions")
             if (parsed.gameMode != "lobby") {
+                EventBus.callEvent(LocrawEvent.JoinGame(parsed))
                 inGame     = true
                 inDuel     = parsed.gameType == LocrawInfo.GameType.DUELS
                 lastLocraw = parsed
-            } else inGame = false
+            } else {
+                EventBus.callEvent(LocrawEvent.JoinLobby(parsed))
+                inGame = false
+            }
         }
 
         event.cancelled = true
