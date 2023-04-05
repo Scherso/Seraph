@@ -11,5 +11,4 @@ class Seraph : ModInitializer {
     override fun init() {
 
     }
-
 }

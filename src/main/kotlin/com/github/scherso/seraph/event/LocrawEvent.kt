@@ -26,5 +26,4 @@ open class LocrawEvent(val locraw: LocrawInfo) : Event() {
      * @see com.github.scherso.seraph.util.location.LocrawUtils
      */
     class JoinLobby(locraw: LocrawInfo) : LocrawEvent(locraw)
-
 }
