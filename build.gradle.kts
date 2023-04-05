@@ -27,7 +27,6 @@ minecraft.version("1.8.9")
 
 repositories {
     maven("https://jitpack.io")
-    maven("https://repo.spongepowered.org/maven/")
 }
 
 dependencies {
@@ -42,11 +41,8 @@ tasks.processResources {
 
     filesMatching("weave.mod.json") {
         expand(mapOf(
-            "id"        to projectId,
             "name"      to projectName,
             "group"     to projectGroup,
-            "version"   to projectVersion,
-            "mcversion" to mcVersion,
         ))
     }
 }
