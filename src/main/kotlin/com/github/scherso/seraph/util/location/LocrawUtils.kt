@@ -96,7 +96,6 @@ class LocrawUtils {
         if (locraw != null) {
             // My attempt at setting 'gameType' to the correct enum value.
             locraw!!.gameType to GameType.fromLocraw(locraw!!.rawGameType!!)
-            @Suppress("KotlinConstantConditions")
             if (parsed.gameMode != "lobby") {
                 EventBus.callEvent(LocrawEvent.JoinGame(parsed))
                 System.out.printf("%s-5s%s-5s%s", "GAME", parsed.gameType, "MODE", parsed.gameMode)
