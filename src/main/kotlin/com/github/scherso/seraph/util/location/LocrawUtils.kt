@@ -87,7 +87,7 @@ class LocrawUtils {
         val parsed: LocrawInfo  = GsonBuilder().create().fromJson(json, LocrawInfo::class.java)
 
         // Basic limbo check
-        if (loop > 5 && parsed.gameType == LocrawInfo.GameType.LIMBO) {
+        if (loop > 5 && parsed.gameType == GameType.LIMBO) {
             sent = false
             loop++
             enqueue(1000)
@@ -95,15 +95,17 @@ class LocrawUtils {
 
         if (locraw != null) {
             // My attempt at setting 'gameType' to the correct enum value.
-            locraw!!.gameType to LocrawInfo.GameType.getFromLocraw(locraw!!.rawGameType!!)
+            locraw!!.gameType to GameType.fromLocraw(locraw!!.rawGameType!!)
             @Suppress("KotlinConstantConditions")
             if (parsed.gameMode != "lobby") {
                 EventBus.callEvent(LocrawEvent.JoinGame(parsed))
+                System.out.printf("%s-5s%s-5s%s", "GAME", parsed.gameType, "MODE", parsed.gameMode)
                 inGame     = true
-                inDuel     = parsed.gameType == LocrawInfo.GameType.DUELS
+                inDuel     = parsed.gameType == GameType.DUELS
                 lastLocraw = parsed
             } else {
                 EventBus.callEvent(LocrawEvent.JoinLobby(parsed))
+                System.out.printf("%s-5s%s-5s%s", "LOBBY", parsed.gameType, "MODE", parsed.gameMode)
                 inGame = false
             }
         }

@@ -5,76 +5,71 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author Scherso ([...](https://github.com/scherso/))
  */
-class LocrawInfo {
-
-    /**
-     * @return The server ID from the serialized JSON.
-     */
+class LocrawInfo(
     @SerializedName("server")
-    val serverId: String? = null
-
-    /**
-     * @return The mode name from the serialized JSON.
-     */
+    val serverId: String? = null,
     @SerializedName("mode")
-    val gameMode = "lobby"
-
-    /**
-     * @return The map name from the serialized JSON.
-     */
+    val gameMode: String? = null,
     @SerializedName("map")
-    val mapName: String? = null
-
-    /**
-     * @return The gametype from the serialized JSON as [GameType] object.
-     */
-    @SerializedName("gametype")
-    var gameType: GameType? = null
+    val mapName: String? = null,
 
     /**
      * @return The raw gametype from the serialized JSON as a [String] object.
+     *         Not as a [GameType] object like you might expect.
      */
     @SerializedName("gametype")
     val rawGameType: String? = null
+) {
+    val gameType = GameType.fromLocraw(rawGameType!!)
+    companion object {
+        @JvmStatic
+        val LIMBO = LocrawInfo("limbo", "", "", "LIMBO")
+    }
+}
 
-    enum class GameType(val serverName: String) {
-        ARCADE_GAMES   ("ARCADE"),
-        BEDWARS        ("BEDWARS"),
-        BLITZ_SG       ("SURVIVAL_GAMES"),
-        BUILD_BATTLE   ("BUILD_BATTLE"),
-        CLASSIC_GAMES  ("LEGACY"),
-        COPS_AND_CRIMS ("MCGO"),
-        DUELS          ("DUELS"),
-        HOUSING        ("HOUSING"),
-        LIMBO          ("LIMBO"),
-        MAIN           ("MAIN"),
-        MEGA_WALLS     ("WALLS3"),
-        MURDER_MYSTERY ("MURDER_MYSTERY"),
-        PIT            ("PIT"),
-        PROTOTYPE      ("PROTOTYPE"),
-        SKYBLOCK       ("SKYBLOCK"),
-        SKYWARS        ("SKYWARS"),
-        SMASH_HEROES   ("SUPER_SMASH"),
-        SPEED_UHC      ("SPEED_UHC"),
-        TNT_GAMES      ("TNTGAMES"),
-        UHC_CHAMPIONS  ("UHC"),
-        UNKNOWN        (""),
-        WARLORDS       ("BATTLEGROUND");
+/**
+ * @author Scherso ([...](https://github.com/scherso/))
+ */
+enum class GameType(val gameType: String) {
 
-        companion object {
+    ARCADE_GAMES   ("ARCADE"),
+    BEDWARS        ("BEDWARS"),
+    BLITZ_SG       ("SURVIVAL_GAMES"),
+    BUILD_BATTLE   ("BUILD_BATTLE"),
+    CLASSIC_GAMES  ("LEGACY"),
+    COPS_AND_CRIMS ("MCGO"),
+    DUELS          ("DUELS"),
+    HOUSING        ("HOUSING"),
+    LIMBO          ("LIMBO"),
+    MAIN           ("MAIN"),
+    MEGA_WALLS     ("WALLS3"),
+    MURDER_MYSTERY ("MURDER_MYSTERY"),
+    PIT            ("PIT"),
+    PROTOTYPE      ("PROTOTYPE"),
+    SKYBLOCK       ("SKYBLOCK"),
+    SKYWARS        ("SKYWARS"),
+    SMASH_HEROES   ("SUPER_SMASH"),
+    SPEED_UHC      ("SPEED_UHC"),
+    TNT_GAMES      ("TNTGAMES"),
+    UHC_CHAMPIONS  ("UHC"),
+    UNKNOWN        (""),
+    WARLORDS       ("BATTLEGROUND");
 
-            /**
-             * Grabs the [GameType] from Locraw. (Location Raw)
-             *
-             * @param gameType the [GameType] to check.
-             * @return The respective value.
-             */
-            fun getFromLocraw(gameType: String): GameType {
-                for (value in values())
-                    if (value.serverName == gameType)
-                        return value
-                return UNKNOWN
+    companion object {
+
+        /**
+         * Grabs the [GameType] from Locraw. (Location Raw)
+         *
+         * @param gameType the [GameType] to check.
+         * @return The respective value.
+         */
+        @JvmStatic
+        fun fromLocraw(gameType: String): GameType {
+            for (value in values()) {
+                if (value.gameType == gameType)
+                    return value
             }
+            return UNKNOWN
         }
     }
 }

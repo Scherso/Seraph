@@ -12,6 +12,7 @@ class LocrawListener {
 
     @SubscribeEvent
     fun onJoinLobby(event: LocrawEvent.JoinLobby) {
+//      Minecraft.getMinecraft().thePlayer.addChatMessage(ChatComponentText("You have joined the ${event.locraw.gameType} lobby."))
         System.out.printf("%s-5s%s-5s%s", "LOBBY", event.locraw.gameType, "MODE", event.locraw.gameMode)
     }
 }

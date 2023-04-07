@@ -35,14 +35,12 @@ dependencies {
 
 tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    inputs.property("version", project.version)
-    inputs.property("mcversion", mcVersion)
-    inputs.property("id", projectId)
 
     filesMatching("weave.mod.json") {
-        expand(mapOf(
-            "name"      to projectName,
-            "group"     to projectGroup,
-        ))
+        expand(
+            "id" to projectId,
+            "name" to projectName,
+            "group" to projectGroup
+        )
     }
 }
